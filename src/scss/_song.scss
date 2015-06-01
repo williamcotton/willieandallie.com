@@ -1,0 +1,35 @@
+.song {
+
+  cursor: pointer;
+
+  h3 {
+    font-size: 1em;
+    line-height: 1em;
+    font-weight: normal;
+    &:hover {
+      text-decoration: underline;
+    }
+    font-family: sans-serif;
+  }
+
+  button.toggle {
+    border: 0;
+    font-size: 0.8em;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    color: #919699;
+  }
+
+  audio {
+    width: 100%;
+  }
+
+  .media {
+    display: none;
+  }
+
+}
+
+
