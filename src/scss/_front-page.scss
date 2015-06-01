@@ -1,7 +1,7 @@
 .front-page {
   display: flex;
   #main-image {
-    transition: flex 1s, min-width 1s;
+    transition: flex 0.5s, min-width 0.5s;
     background-color: #eee;
     
     #sketch {
@@ -104,12 +104,33 @@
     }
   }
 }
-
 @media (min-width: 481px) {
   .front-page {
     display: flex; 
     #main-image {
-      flex: 0 0 40%;
+      flex: 0 0 30%;
+      #sketch {
+        min-width: 158px;
+      }
+
+      
+      height: 100vh;
+      overflow: hidden;
+      #credit {
+        font-size: 0.5em;
+        margin-left: 10px;
+      }
+    }
+    #main-content {
+      flex: 1;
+    }
+  }
+}
+@media (min-width: 741px) {
+  .front-page {
+    display: flex; 
+    #main-image {
+      flex: 0 0 50%;
       #sketch {
         min-width: 158px;
       }

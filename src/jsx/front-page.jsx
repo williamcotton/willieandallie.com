@@ -5,7 +5,8 @@ var YouTube = require('react-youtube');
 var songs = [
   { title: "Go On And Get Crucified", lyrics:"", type:'mp3', src:'https://s3-us-west-1.amazonaws.com/willieandallie/Crucifed.mp3'},
   { title: "Write Me A Letter", lyrics:"", type:'mp3', src:'https://s3-us-west-1.amazonaws.com/willieandallie/Write+Me+A+Letter.mp3'},
-  { title: "The Day The Old Man Was Dead", lyrics:"", type:'mp3', src:'https://s3-us-west-1.amazonaws.com/willieandallie/The+Day+The+Old+Man+Was+Dead.mp3'}
+  { title: "The Day The Old Man Was Dead", lyrics:"", type:'mp3', src:'https://s3-us-west-1.amazonaws.com/willieandallie/The+Day+The+Old+Man+Was+Dead.mp3'},
+  { title: "Riot On A Screen", lyrics:"", type:'mp3', src:'https://s3-us-west-1.amazonaws.com/willieandallie/Riot+On+A+Screen.mp3'}
 ];
 var shows = [
  { location: "Noe Valley Farmer's Market", date:"July 25th @ 11:00am"},
