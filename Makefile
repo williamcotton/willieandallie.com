@@ -1,7 +1,6 @@
 all: build
 
 build: public/build.js public/build.css
-	mkdir -p public
 
 build_css: clean_css server/public/build.css
 
@@ -22,10 +21,13 @@ clean_js:
 	rm -f public/build.browserify.js
 
 public/build.css:
+	mkdir -p public
 	./node_modules/.bin/node-sass src/scss/index.scss $@ --output-style compressed
 
 public/build.browserify.js:
+	mkdir -p public
 	./node_modules/.bin/browserify src/js/browser-app.js -t reactify > $@
 
 public/build.js: public/build.browserify.js
+	mkdir -p public
 	./node_modules/.bin/uglifyjs $< -m -c > $@
