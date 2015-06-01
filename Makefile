@@ -1,6 +1,7 @@
 all: build
 
 build: public/build.js public/build.css
+	mkdir -p public
 
 build_css: clean_css server/public/build.css
 
