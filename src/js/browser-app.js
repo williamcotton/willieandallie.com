@@ -1,5 +1,13 @@
 var React = require("react");
 var App = require('../jsx/app.jsx');
+var xhr = require('xhr');
+
+var getShows = function(callback) {
+  xhr("/shows.json", function(err, res, body) {
+    var shows = JSON.parse(body);
+    callback(err, shows);
+  });
+}
 
 /*
 
@@ -24,4 +32,5 @@ var renderBrowserApp = function(content, req, res, opts) {
 
 var isoApp = require("./iso-app")({
   renderApp: renderBrowserApp,
+  getShows: getShows
 });

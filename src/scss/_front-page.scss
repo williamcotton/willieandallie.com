@@ -2,6 +2,15 @@
 
 .front-page {
   @include flexbox;
+
+  a {
+    text-decoration: none;
+    color: #919699;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  
   #main-image {
     transition: flex 0.5s, min-width 0.5s, -webkit-flex 0.5s;
     background-color: #eee;
@@ -63,14 +72,19 @@
       list-style: none;
       font-family: sans-serif;
       li {
+        margin-bottom: 5px;
+        @include flexbox;
+        .date-time {
+          font-size: 0.9em;
+          display: block;
+        }
         .location {
+          font-size: 0.9em;
           margin-left: 0px;
           display: block;
-          width: 210px;
+          width: 200px;
         }
-        .date {
-          display: block;
-        }
+
       }
 
     }

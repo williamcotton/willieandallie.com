@@ -8,9 +8,6 @@ var songs = [
   { title: "The Day The Old Man Was Dead", lyrics:"", type:'mp3', src:'https://s3-us-west-1.amazonaws.com/willieandallie/The+Day+The+Old+Man+Was+Dead.mp3'},
   { title: "Riot On A Screen", lyrics:"", type:'mp3', src:'https://s3-us-west-1.amazonaws.com/willieandallie/Riot+On+A+Screen.mp3'}
 ];
-var shows = [
- { location: "Noe Valley Farmer's Market", date:"July 25th @ 11:00am"},
-]
 var youtube = { title: "Crazy As A Loon (John Prine)", lyrics:"", type:'youtube', src:'http://www.youtube.com/watch?v=73lpAL6gvfY' };
 var FrontPage = React.createClass({
   getInitialState: function() {
@@ -23,6 +20,8 @@ var FrontPage = React.createClass({
     this.selectedSong = song;
   },
   render: function() {
+
+    var shows = this.props.shows;
 
     var component = this;
 
@@ -60,17 +59,19 @@ var FrontPage = React.createClass({
     var createShow = function(show) {
       return (
         <li key={show.date}>
-          <span className="date">{show.date}</span>
-          <span className="location">{show.location}</span>
+          <span className="location"><a href={show.link}>{show.place}</a></span>
+          <span className="date-time">
+            <span className="date">{show.date}</span>, <span className="time">{show.time}</span>
+          </span>
         </li>
       )
     }
 
-    console.log(component.state.youTubePlayer);
+    // console.log(component.state.youTubePlayer);
 
-    if (component.state.youTubePlayer) {
-      console.log(component.state.youTubePlayer.getPlayerState());
-    }
+    // if (component.state.youTubePlayer) {
+    //   console.log(component.state.youTubePlayer.getPlayerState());
+    // }
 
     var youTubePlaying = component.state.youTubePlayer ? (component.state.youTubePlayer.getPlayerState() == 2) || (component.state.youTubePlayer.getPlayerState() == 5) : false;
 

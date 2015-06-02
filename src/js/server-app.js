@@ -1,5 +1,6 @@
 var React = require("react");
 require('node-jsx').install({extension: '.jsx'});
+var request = require('request');
 var express = require('express');
 var app = express();
 
@@ -32,6 +33,44 @@ app.listen(app.get('port'), function() {
 
 /*
 
+  Shows
+  -----
+  Google spreadsheet: https://docs.google.com/spreadsheets/d/1tjdhFFV737AdOS9OSwH7ZItsHIsCA044P9vrdKp25Fs/edit#gid=0
+
+*/
+
+var showsUri = "https://docs.google.com/spreadsheets/d/1tjdhFFV737AdOS9OSwH7ZItsHIsCA044P9vrdKp25Fs/gviz/tq?&tq&gid=0";
+
+var getShows = function(callback) {
+  var shows = [];
+  request(showsUri, function(err, res, body) {
+    var dataJSON = body.split("(")[1].split(")")[0];
+    var data = JSON.parse(dataJSON);
+    var table = data.table;
+    var rows = table.rows;
+    rows.forEach(function(row) {
+      var show = {
+        place: row.c[0].v,
+        date: row.c[1].v,
+        time: row.c[2].f,
+        price: row.c[3].v,
+        link: row.c[4].v
+      }
+      shows.push(show)
+    });
+    callback(err, shows);
+  }); 
+}
+
+app.get("/shows.json", function(req, res) {
+  getShows(function(err, shows) {
+    res.json(shows);
+  });
+});
+
+
+/*
+
   renderApp
   ---------
   server version
@@ -57,5 +96,6 @@ var renderServerApp = function(content, req, res, opts) {
 
 var isoApp = require("./iso-app")({
   renderApp: renderServerApp,
-  app: app
+  app: app,
+  getShows: getShows
 });
