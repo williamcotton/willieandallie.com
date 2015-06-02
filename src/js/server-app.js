@@ -44,7 +44,8 @@ var showsUri = "https://docs.google.com/spreadsheets/d/1tjdhFFV737AdOS9OSwH7ZIts
 var getShows = function(callback) {
   var shows = [];
   request(showsUri, function(err, res, body) {
-    var dataJSON = body.split("(")[1].split(")")[0];
+    var prefix = "google.visualization.Query.setResponse(";
+    var dataJSON = body.split("google.visualization.Query.setResponse(")[1].slice(0, body.length-prefix.length-2);
     var data = JSON.parse(dataJSON);
     var table = data.table;
     var rows = table.rows;
