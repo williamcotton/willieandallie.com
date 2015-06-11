@@ -21,7 +21,7 @@ var Player = React.createClass({
     var playButton = "►";
     var button = <button className="toggle">{playing ? "❚❚" : "►"}</button>
     return (
-      <div className="song" onClick={this.toggle} onTouchStart={this.toggle} >
+      <div className="song" onClick={this.toggle} >
         <h3>{button}{title}</h3>
       </div>
     );
