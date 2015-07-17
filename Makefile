@@ -1,6 +1,10 @@
 all: build
 
-build: public/build.js public/build.css
+build: public/build.js public/build.css copy_images
+
+copy_images:
+	mkdir -p public/images
+	cp -f src/images/* public/images
 
 build_css: clean_css server/public/build.css
 
