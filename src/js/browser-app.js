@@ -1,6 +1,9 @@
 var React = require("react");
 var App = require('../jsx/app.jsx');
 var xhr = require('xhr');
+var app = {
+  get: require("./browser-app-get")
+}
 
 var getShows = function(callback) {
   xhr("/shows.json", function(err, res, body) {

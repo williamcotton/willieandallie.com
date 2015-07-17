@@ -1,4 +1,4 @@
-paramifyString = function (str, params, mod) {
+var paramifyString = function(str, params, mod) {
   mod = str;
   for (var param in params) {
     if (params.hasOwnProperty(param)) {
@@ -11,7 +11,7 @@ paramifyString = function (str, params, mod) {
   return mod === str ? '([._a-zA-Z0-9-%()]+)' : mod;
 }
 
-regifyString = function(str, params) {
+var regifyString = function(str, params) {
   var matches;
   var last = 0;
   var out = '';
@@ -44,7 +44,12 @@ regifyString = function(str, params) {
   };
 }
 
-var browserRouter = function(routes) {
+var didFire = false;
+
+var get = function(route, handler) {
+  if (didFire) {
+    return;
+  }
   var searchString = window.location.search;
   var query = {};
   searchString.replace(
@@ -58,14 +63,11 @@ var browserRouter = function(routes) {
   var handler;
   var handlerMatch;
   var handlerCaptures;
-  for (route in routes) {
-    var regEx = regifyString(route);
-    var match = path.match(regEx.str);
-    if (match) {
-      handler = routes[route];
-      handlerMatch = match;
-      handlerCaptures = regEx.captures || [];
-    }
+  var regEx = regifyString(route);
+  var match = path.match(regEx.str);
+  if (match) {
+    handlerMatch = match;
+    handlerCaptures = regEx.captures || [];
   }
   if (handler) {
     var params = {};
@@ -79,19 +81,9 @@ var browserRouter = function(routes) {
     var res = {
       setHeader: function() {}
     };
+    didFire = true;
     handler(req, res);
   }
 }
 
-var isoRouter = function(routes, app) {
-  if (typeof(window) != "undefined") {
-    browserRouter(routes);
-  }
-  else if (typeof(process) != "undefined" && app) {
-    for (route in routes) {
-      app.get(route, routes[route]);
-    }
-  }
-}
-
-module.exports = isoRouter;
+module.exports = get;
