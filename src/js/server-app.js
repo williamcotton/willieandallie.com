@@ -45,7 +45,7 @@ var getShows = function(callback) {
   var shows = [];
   request(showsUri, function(err, res, body) {
     var prefix = "google.visualization.Query.setResponse(";
-    var dataJSON = body.split("google.visualization.Query.setResponse(")[1].slice(0, body.length-prefix.length-2);
+    var dataJSON = body.split("google.visualization.Query.setResponse(")[1].slice(0, body.length-prefix.length-10);
     var data = JSON.parse(dataJSON);
     var table = data.table;
     var rows = table.rows;

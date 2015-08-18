@@ -10,17 +10,29 @@ var isoApp = function(options) {
   var getShows = options.getShows;
 
   app.get('/song/:title', function(req, res) {
+    console.log("song", req, res);
     var title = req.params.title;
     var content = Song({song: {title: title}});
     renderApp(content, req, res);
   });
 
   app.get('/', function(req, res) {
+    console.log("front-page");
     getShows(function(err, shows) {
       var content = FrontPage({shows:shows});
       renderApp(content, req, res);
     });
   });
+
+  app.get('/bleep', function(req, res) {
+    console.log("bleep");
+    getShows(function(err, shows) {
+      var content = FrontPage({shows:shows});
+      renderApp("123", req, res);
+    });
+  });
+
+  return app;
 
 }
 

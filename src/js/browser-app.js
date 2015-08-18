@@ -1,9 +1,7 @@
 var React = require("react");
 var App = require('../jsx/app.jsx');
 var xhr = require('xhr');
-var app = {
-  get: require("./browser-app-get")
-}
+var app = require("./browser-express")();
 
 var getShows = function(callback) {
   xhr("/shows.json", function(err, res, body) {
@@ -35,5 +33,8 @@ var renderBrowserApp = function(content, req, res, opts) {
 
 var isoApp = require("./iso-app")({
   renderApp: renderBrowserApp,
+  app: app,
   getShows: getShows
 });
+
+// app.listen - start listening to path name changes, and trigger routes
