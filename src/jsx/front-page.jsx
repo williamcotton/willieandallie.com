@@ -3,9 +3,9 @@ var Song = require('./song.jsx')
 var Player = require('./player.jsx')
 var YouTube = require('react-youtube')
 var songs = [
-  { title: 'Go On And Get Crucified', lyrics: '', type: 'mp3', src: 'https://s3-us-west-1.amazonaws.com/willieandallie/Crucifed.mp3'},
-  { title: 'Write Me A Letter', lyrics: '', type: 'mp3', src: 'https://s3-us-west-1.amazonaws.com/willieandallie/Write+Me+A+Letter.mp3'},
-  { title: 'The Day The Old Man Was Dead', lyrics: '', type: 'mp3', src: 'https://s3-us-west-1.amazonaws.com/willieandallie/The+Day+The+Old+Man+Was+Dead.mp3'}
+  { title: 'Go On And Get Crucified', lyrics: '', type: 'mp3', src: 'https://s3-us-west-1.amazonaws.com/willieandallie/Crucifed.mp3' },
+  { title: 'Write Me A Letter', lyrics: '', type: 'mp3', src: 'https://s3-us-west-1.amazonaws.com/willieandallie/Write+Me+A+Letter.mp3' },
+  { title: 'The Day The Old Man Was Dead', lyrics: '', type: 'mp3', src: 'https://s3-us-west-1.amazonaws.com/willieandallie/The+Day+The+Old+Man+Was+Dead.mp3' }
 ]
 
 var videos = [
@@ -70,6 +70,10 @@ var FrontPage = React.createClass({
       )
     }
 
+    var showsContainer = shows.length
+      ? <ol className='shows'><h2>Shows</h2>{shows.map(createShow)}</ol>
+      : <div id='songs'>We're recording! Look out for shows in the spring!</div>
+
     var mainImage = this.state.selectedSong.youTubeElement || sketch
     var content = this.props.content
     return (
@@ -88,10 +92,7 @@ var FrontPage = React.createClass({
             <h2>Music</h2>
             {songs.map(createSong)}
           </div>
-          <ol className='shows'>
-            <h2>Shows</h2>
-            {shows.map(createShow)}
-          </ol>
+          {showsContainer}
           <div className='contact'>
             <h2>Contact</h2>
             <span className='email'>willieandallie@gmail.com</span>
