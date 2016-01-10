@@ -72,7 +72,7 @@ var FrontPage = React.createClass({
 
     var showsContainer = shows.length
       ? <ol className='shows'><h2>Shows</h2>{shows.map(createShow)}</ol>
-      : <div id='songs'>We're recording! Look out for shows in the spring!</div>
+      : <div id='songs'><h2>Shows</h2>We're recording! Look out for shows in the spring!</div>
 
     var mainImage = this.state.selectedSong.youTubeElement || sketch
     var content = this.props.content
