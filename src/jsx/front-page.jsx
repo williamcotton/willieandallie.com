@@ -101,7 +101,10 @@ var FrontPage = React.createClass({
       </div>
     )
     return <div className='rock-and-country'>
-
+      <h1>Willie & Allie</h1>
+      <h2>Between a Rock and a Country Place</h2>
+      <h3>Coming Soon</h3>
+      <img src='/images/band-overlay-1.png' />
     </div>
   }
 })
