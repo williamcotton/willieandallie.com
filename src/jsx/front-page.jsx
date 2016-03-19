@@ -76,7 +76,7 @@ var FrontPage = React.createClass({
 
     var mainImage = this.state.selectedSong.youTubeElement || sketch
     var content = this.props.content
-    return (
+    var frontPageNorlam = (
     <div className='front-page'>
         <div id='main-image'>
           { mainImage }
@@ -100,6 +100,9 @@ var FrontPage = React.createClass({
         </div>
       </div>
     )
+    return <div className='rock-and-country'>
+
+    </div>
   }
 })
 module.exports = FrontPage
