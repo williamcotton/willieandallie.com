@@ -3,12 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title><%- content.title || default_title %></title>
+  <title><%- title %></title>
   <link href="/build.css" rel="stylesheet" type="text/css">
-  <script src="//use.edgefonts.net/smokum.js"></script>
+  <script type="text/javascript">
+    window.incomingMessage = <%- JSON.stringify(incomingMessage) %>;
+  </script>
 </head>
 <body>
-  <div id="container"><%- HTML %></div>
-  <script src="/build.js" type="text/javascript" charset="utf-8"></script>
+  <div id="<%- rootDOMId %>"><%- HTML %></div>
+  <% if (typeof(dontLoadJS) === 'boolean' && !dontLoadJS) { %><script src='/build.js' type='text/javascript' charset='utf-8'></script><% } %>
 </body>
 </html>

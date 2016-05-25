@@ -29,3 +29,11 @@ node_modules
 
 public/
 public/*.*
+
+.env
+
+build/
+
+*.pem
+
+user-authentication-data-store.db
