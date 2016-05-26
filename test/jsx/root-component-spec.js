@@ -1,4 +1,6 @@
 var test = require('tapes')
+var React = require('react')
+require('node-jsx').install({extension: '.jsx'})
 
 var RootComponent = require('../../src/jsx/root-component.jsx')
 

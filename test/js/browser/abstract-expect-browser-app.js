@@ -14,11 +14,13 @@ module.exports = function (options, callback) {
 
   if (!global.document) {
     global.document = jsdom.jsdom('<!doctype html><html><body><div id="universal-app-container"></div></body></html>')
-    global.window = global.document.parentWindow
+    global.window = global.document.defaultView
     global.navigator = {
       userAgent: 'node.js'
     }
   }
+
+  global.window = global.document.defaultView
 
   global.window.incomingMessage = {}
   global.window.incomingMessage.defaultTitle = defaultTitle

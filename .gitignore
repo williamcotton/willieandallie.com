@@ -35,5 +35,3 @@ public/*.*
 build/
 
 *.pem
-
-user-authentication-data-store.db
