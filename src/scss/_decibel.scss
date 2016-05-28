@@ -370,6 +370,15 @@ label {
 .nav > li.active > a {
   color: #fff;
 }
+.nav > li > h3 {
+  margin: 0;
+  padding: 10px 18px 0 0; 
+}
+.nav > li > h3 > a {
+  color: rgba(255, 255, 255, 0.7);
+  font-family: smokum;
+  text-transform: none;
+}
 /* ======= Footer ======= */
 .footer {
   background: #000000;
@@ -395,7 +404,28 @@ label {
   width: 100%;
   position: relative;
   color: #fff;
-  background: #101113;
+  background-color: rgba(35,30,30,0.8);
+  background-image: url(/images/06.png);
+  background-repeat: repeat;
+  overflow: hidden!important;
+}
+.slide {
+  position: absolute;
+  overflow: hidden;
+  background-position: 50% 50%;
+  background-size: cover;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  transform: scale(1);
+  opacity: 1;
+  transition: all 3000ms;
+  z-index: -1;
+}
+.zoomedIn {
+  transform: scale(2);
+  opacity: 0;
 }
 .logo-holder {
   height: 100px;
@@ -412,9 +442,10 @@ label {
   padding-top: 80px;
 }
 .promo-content .headline {
-  font-size: 48px;
-  text-transform: uppercase;
+  font-size: 108px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+  font-family: smokum;
+  font-weight: normal;
 }
 .promo-content .tagline {
   font-size: 24px;
@@ -741,7 +772,6 @@ label {
   font-size: 14px;
   margin-bottom: 15px;
   margin-top: 0;
-  max-width: 235px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1208,144 +1238,3 @@ label {
   }
 }
 /* Large devices (large desktops, 1200px and up) */
-/* Theme custom */
-.logo-holder {
-  background-image: url('../images/logo-3.svg');
-}
-/* ======= Configure Style (Remove in production) ======= */
-body {
-  overflow-x: hidden;
-}
-.config-trigger {
-  position: absolute;
-  top: 30px;
-  left: -36px;
-  width: 36px;
-  height: 36px;
-  background: #222;
-  color: #fff;
-  text-align: center;
-  -webkit-border-top-right-radius: 0;
-  -webkit-border-bottom-right-radius: 0;
-  -webkit-border-bottom-left-radius: 4px;
-  -webkit-border-top-left-radius: 4px;
-  -moz-border-radius-topright: 0;
-  -moz-border-radius-bottomright: 0;
-  -moz-border-radius-bottomleft: 4px;
-  -moz-border-radius-topleft: 4px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 4px;
-  border-top-left-radius: 4px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  text-decoration: none;
-}
-.config-trigger:hover {
-  background: #000;
-  text-decoration: none;
-}
-.config-trigger:hover .fa {
-  color: #fff;
-}
-.config-trigger .fa {
-  font-size: 22px;
-  padding-top: 7px;
-  display: block;
-  color: rgba(255, 255, 255, 0.8);
-}
-.config-panel {
-  position: absolute;
-  top: 80px;
-  right: -190px;
-  z-index: 10;
-  width: 190px;
-}
-.config-panel .panel-inner {
-  position: relative;
-  background: #222;
-  color: #fff;
-  padding: 15px;
-  -webkit-border-top-right-radius: 0;
-  -webkit-border-bottom-right-radius: 0;
-  -webkit-border-bottom-left-radius: 4px;
-  -webkit-border-top-left-radius: 4px;
-  -moz-border-radius-topright: 0;
-  -moz-border-radius-bottomright: 0;
-  -moz-border-radius-bottomleft: 4px;
-  -moz-border-radius-topleft: 4px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 4px;
-  border-top-left-radius: 4px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-}
-.config-panel .panel-title {
-  font-weight: 600;
-  margin-bottom: 15px;
-  font-size: 14px;
-  text-transform: uppercase;
-}
-.config-panel label {
-  color: #fff;
-}
-.config-panel #color-options {
-  margin-bottom: 0px;
-}
-.config-panel #color-options li a {
-  display: block;
-  width: 20px;
-  height: 20px;
-  border: 2px solid transparent;
-}
-.config-panel #color-options li a:hover {
-  -webkit-opacity: 0.9;
-  -moz-opacity: 0.9;
-  opacity: 0.9;
-  border: 2px solid rgba(255, 255, 255, 0.8);
-}
-.config-panel #color-options li.active a {
-  border: 2px solid #fff;
-}
-.config-panel #color-options li.theme-1 a {
-  background: #5bb66f;
-}
-.config-panel #color-options li.theme-2 a {
-  background-color: #2696C2;
-}
-.config-panel #color-options li.theme-3 a {
-  background-color: #C9091A;
-}
-.config-panel #color-options li.theme-4 a {
-  background-color: #F2C020;
-}
-.config-panel #color-options li.theme-5 a {
-  background-color: #0F5EE8;
-}
-.config-panel #color-options li.theme-6 a {
-  background-color: #1DAEB0;
-}
-.config-panel #color-options li.theme-7 a {
-  background-color: #6B64AE;
-}
-.config-panel #color-options li.theme-8 a {
-  background-color: #EC3A81;
-}
-.config-panel #color-options li.theme-9 a {
-  background-color: #C79F7C;
-}
-.config-panel #color-options li.theme-10 a {
-  background-color: #AEBB4B;
-}
-.config-panel .close {
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  color: #fff;
-}
-.config-panel .close .fa {
-  color: #fff;
-}

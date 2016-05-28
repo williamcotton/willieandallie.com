@@ -13,7 +13,7 @@ var RootComponent = React.createClass({
           <nav className='main-nav' role='navigation'>
             <div id='navbar-collapse' className='navbar-collapse collapse text-center'>
               <ul className='nav navbar-nav center-block'>
-                <li className='nav-item'><a className='scrollto' href='#promo'>Home</a></li>
+                <li className='nav-item'><h3><a className='scrollto' href='#promo'>Willie & Allie</a></h3></li>
                 <li className='nav-item'><a className='scrollto' href='#gigs'>Gigs</a></li>
                 <li className='nav-item'><a className='scrollto' href='#music'>Music</a></li>
                 <li className='nav-item'><a className='scrollto' href='#video'>Video</a></li>

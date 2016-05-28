@@ -21,8 +21,8 @@ var createGig = (gig) => {
         </div>
       </div>
       <div className='gig-actions'>
-        {gig.extraInfo ? <a className='btn btn-xs btn-ghost-secondary' data-toggle='collapse' href='#info-extra-1' aria-expanded='false' aria-controls='info-extra-1' >More info</a> : false}
-        {gig.ticketUrl ? <a className='btn btn-xs btn-secondary' href={gig.ticketUrl}>Buy Tickets</a> : false}
+        {gig.extraInfo ? <a className='btn btn-xs btn-ghost-secondary' data-toggle='collapse' aria-expanded='false' aria-controls='info-extra-1' >More info</a> : false}
+        {gig.ticketUrl === true ? <a className='btn btn-xs btn-secondary' href={gig.ticketUrl}>Buy Tickets</a> : false}
       </div>
       {gig.extraInfo ? <div id='info-extra-1' className='collapse info-extra'></div> : false}
     </div>

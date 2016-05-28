@@ -1,6 +1,4 @@
-module.exports = function (options) {
-  var defaultTitle = options.defaultTitle
-
+module.exports = function ({app, defaultTitle, dataSchema}) {
   var fs = require('fs')
 
   /*
@@ -14,7 +12,9 @@ module.exports = function (options) {
   */
 
   var express = require('express')
-  var app = options.app || express()
+  if (!app) {
+    app = express()
+  }
 
   var expectReactRenderer = require('../lib/expect-server-react-renderer')
 
@@ -24,11 +24,29 @@ module.exports = function (options) {
   // expect-server-react-renderer
   app.use(expectReactRenderer({
     RootComponent: require('../../jsx/root-component.jsx'),
-    app: app,
-    defaultTitle: defaultTitle,
+    app,
+    defaultTitle,
     rootDOMId: 'universal-app-container',
-    template: template
+    template
   }))
+
+  /*
+
+    graphql
+    -------
+
+  */
+
+  var graphql = require('graphql')
+  var bodyParser = require('body-parser')
+
+  app.post('/q', bodyParser.text({ type: 'application/graphql' }), ({body}, res) => {
+    graphql.graphql(dataSchema, body).then((result) => res.status(200).json(result))
+  })
+
+  var q = (query, callback) => {
+    return graphql.graphql(dataSchema, query)
+  }
 
   /*
 
@@ -38,9 +56,7 @@ module.exports = function (options) {
 
   */
 
-  var universalServerApp = require('../../jsx/universal-app.jsx')({
-    app: app
-  })
+  var universalServerApp = require('../../jsx/universal-app.jsx')({app, q})
 
   // static assets
   var publicDir = __dirname + '/../../../public'

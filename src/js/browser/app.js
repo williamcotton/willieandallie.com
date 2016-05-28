@@ -1,5 +1,5 @@
 module.exports = function (options) {
-  // var request = options.request
+  var request = options.request
   // var localStorage = options.localStorage
 
   /*
@@ -43,15 +43,29 @@ module.exports = function (options) {
 
   /*
 
+    graphql
+    -------
+
+  */
+
+  var q = (query, callback) => {
+    return new Promise((accept, reject) => {
+      request({method: 'POST', url: '/q', body: query, headers: {'Content-Type': 'application/graphql'}}, (err, res) => {
+        if (err) { return reject(err) }
+        accept(JSON.parse(res.body))
+      })
+    })
+  }
+
+  /*
+
     universal app
     ------------
     browser version
 
   */
 
-  var universalBrowserApp = require('../../jsx/universal-app.jsx')({
-    app: app
-  })
+  var universalBrowserApp = require('../../jsx/universal-app.jsx')({app, q})
 
   return universalBrowserApp
 }
