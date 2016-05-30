@@ -7,7 +7,7 @@ module.exports = class Video extends React.Component {
         <h2 className='section-title'>Video</h2>
         <div className='video-action'>
           <div className='section'>
-          <iframe width='640' height='360' src='https://www.youtube.com/embed/QzsN7wvu0Lo?rel=0&amp;controls=0&amp;showinfo=0' frameBorder='0' allowFullScreen></iframe>
+            <iframe src='https://www.youtube.com/embed/QzsN7wvu0Lo?rel=0&amp;controls=0&amp;showinfo=0' frameBorder='0' allowFullScreen></iframe>
           </div>
           <a className='btn btn-ghost-primary' href='https://www.youtube.com/user/PuffaloPhil'>More Videos on YouTube</a>
         </div>

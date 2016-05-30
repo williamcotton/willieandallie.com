@@ -1,15 +1,21 @@
 var React = require('react')
-let {Modal} = require('react-bootstrap')
+//let {Modal} = require('react-bootstrap')
 
 var Promo = require('./promo.jsx')
 var Gigs = require('./gigs.jsx')
 var Music = require('./music.jsx')
 var Video = require('./video.jsx')
 var Contact = require('./contact.jsx')
+var Signup = require('./signup.jsx')
+var Welcome = require('./welcome.jsx')
+var Login = require('./login.jsx')
+var ResetPassword = require('./reset-password.jsx')
+var NewPassword = require('./new-password.jsx')
+var ResetPasswordEmailSent = require('./reset-password-email-sent.jsx')
 
-var universalApp = ({app, q}) => {
-  app.get('/', (req, {renderApp}) => {
-    q('{ gigs { title, day, month, location, time, extraInfo, ticketUrl } }').then(({data: {gigs}}) => {
+var universalApp = ({app}) => {
+  app.get('/', ({q, query: {didSignUp}}, {renderApp}) => {
+    q('{ upcomingGigs { title, day, month, location, time, extraInfo, ticketUrl } }').then(({data: {upcomingGigs}}) => {
       renderApp(<div>
         <Promo
           headline='Willie & Allie'
@@ -22,18 +28,18 @@ var universalApp = ({app, q}) => {
           ]}
         />
         <Gigs
-          gigs={gigs}
+          gigs={upcomingGigs}
         />
-        <section className='section text-center'>
+        <section className='section text-center center-block'>
           <h3>Mailing List Signup</h3>
-          <p>Enter your email address to receive a few updates a year!</p>
-          <form action='/newEmailListSignup' className='form-inline has-warning'>
+          <p>Signup to receive emails about new releases and gigs!</p>
+          <form action='/newEmailListSignup' method='post' className='form-inline has-warning'>
             <input placeholder='jane.doe@example.com' name='emailAddress' type='email' className='form-control form-control-warning' />
             <button type='submit' className='btn btn-ghost-primary'>Sign Up</button>
           </form>
         </section>
         <Music />
-        <Video onClick={() => console.log(this)}/>
+        <Video />
         <Contact
           contactMessage='Sed feugiat varius felis pulvinar tincidunt. Donec bibendum fermentum justo, sit amet commodo augue porta in.'
           bookingEmail='willieandallie@gmail.com'
@@ -46,10 +52,32 @@ var universalApp = ({app, q}) => {
     })
   })
 
-  app.post('/newEmailListSignup', ({body: {emailAddress}}) => {
+  app.post('/newEmailListSignup', ({q, body: {emailAddress}}, {redirect, send}) => {
     q(`mutation { newEmailListSignup(emailAddress: "${emailAddress}") { emailAddress } }`).then((res) => {
-      console.log(res)
+      console.log('newEmailListSignup result', res)
+      //redirect('/')
+      //send('ok')
     })
+  })
+
+  require('../js/lib/expect-universal-user-authentication')({
+    app,
+    login: { component: Login, successRedirect: '/welcome' },
+    signup: { component: Signup, successRedirect: '/welcome' },
+    logout: { successRedirect: '/' },
+    resetPassword: { component: ResetPassword, successComponent: ResetPasswordEmailSent },
+    newPassword: { component: NewPassword }
+  })
+
+  var userRequired = ({user}, {renderApp}, next) => {
+    if (!user) {
+      return renderApp(<h2>Login Required!</h2>, {title: 'Login Required'})
+    }
+    next()
+  }
+
+  app.get('/welcome', userRequired, (req, {renderApp}) => {
+    renderApp(<Welcome />, {title: 'Welcome'})
   })
 
   return app

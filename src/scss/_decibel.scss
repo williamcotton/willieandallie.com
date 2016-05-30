@@ -229,6 +229,9 @@ textarea {
 label {
   color: #b10817;
 }
+form input {
+  margin-right: 10px;
+}
 .form-group {
   margin-bottom: 30px;
 }
@@ -781,6 +784,11 @@ label {
 .music-section .music-action {
   margin-top: 30px;
 }
+/* ======= Video Section ======= */
+.video-section iframe {
+  width: 640px;
+  height: 360px;
+}
 /* ======= About Section ======= */
 .about-section .section-title {
   margin-bottom: 30px;
@@ -1094,6 +1102,12 @@ label {
 }
 /* Extra small devices (phones, less than 768px) */
 @media (max-width: 767px) {
+  form {
+    padding: 10px;
+  }
+  form input {
+    margin-bottom: 10px;
+  }
   .header {
     background: rgba(0, 0, 0, 0.9);
     padding-top: 5px;
@@ -1113,7 +1127,10 @@ label {
     padding-top: 0px;
   }
   .promo-content .headline {
-    font-size: 36px;
+    font-size: 60px;
+  }
+  .promo-content .tagline {
+    font-size: 13px;
   }
   .updates-block {
     position: static;
@@ -1161,10 +1178,8 @@ label {
     padding: 0px;
   }
   .music-section .albums-block .album-title {
-    max-width: 100px;
+    max-width: 290px;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
   .music-section .albums-block .cover-figure {
     max-width: 100%;
@@ -1175,6 +1190,10 @@ label {
   }
   .contact-section .channels-list .icon {
     height: 15px;
+  }
+  .video-section iframe {
+    width: 260px;
+    height: 150px;
   }
 }
 /* Small devices (tablets, 768px and up) */

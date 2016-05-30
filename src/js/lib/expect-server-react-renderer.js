@@ -2,11 +2,28 @@ var async = require('async')
 
 var middlewareStack = []
 
+var defaultTemplate = `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title><%- title %></title>
+  <link href="/build.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript">
+    window.incomingMessage = <%- JSON.stringify(incomingMessage) %>
+  </script>
+</head>
+<body>
+  <div id="<%- rootDOMId %>"><%- HTML %></div>
+  <% if (typeof(dontLoadJS) === 'boolean' && !dontLoadJS) { %><script src='/build.js' type='text/javascript' charset='utf-8'></script><% } %>
+</body>
+</html>`
+
 var reactRenderApp = function (options) {
   var React = require('react')
   var ReactDOMServer = require('react-dom/server')
   var ejs = require('ejs')
-  var template = options.template
+  var template = defaultTemplate || options.template
   var RootComponent = options.RootComponent ? React.createFactory(options.RootComponent) : React.createClass({propTypes: { content: React.PropTypes.element }, render: function () { return React.DOM.div({ className: 'universal-app-container' }, this.props.content) }})
   var formatTitle = options.formatTitle || function (defaultTitle, title) { return defaultTitle + (title ? ' - ' + title : '') }
   return function reactRenderer (req, res, next) {

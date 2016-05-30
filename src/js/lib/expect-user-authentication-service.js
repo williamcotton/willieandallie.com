@@ -2,6 +2,7 @@ var jwt = require('jsonwebtoken')
 var bcrypt = require('bcrypt')
 
 module.exports = ({userAuthenticationDataStore, emailService, userTokenExpiresIn, verificationPath, resetPasswordPath, issuer, rsaPrivateKeyPem, rsaPublicKeyPem}) => {
+  issuer = issuer || 'expect-user-auth'
   // issuer owns rsaPrivateKeyPem and rsaPublicKeyPem
   // openssl genrsa -out expect-user-authentication-service.pem 1024
   // openssl rsa -in expect-user-authentication-service.pem -pubout -out expect-user-authentication-service-public.pem
@@ -23,8 +24,8 @@ module.exports = ({userAuthenticationDataStore, emailService, userTokenExpiresIn
         }
         bcrypt.compare(password, hash, (errHashCompare, res) => {
           if (!errHashCompare && !errHashLookup && res) {
-            jwt.sign(user, rsaPrivateKeyPem, {expiresIn: userTokenExpiresIn, issuer: issuer, audience: audience, algorithm: 'RS256'}, (token) => {
-              callback(false, user, token)
+            jwt.sign(user, rsaPrivateKeyPem, {expiresIn: userTokenExpiresIn, issuer: issuer, audience: audience, algorithm: 'RS256'}, (err, token) => {
+              callback(err, user, token)
             })
           } else {
             callback(true, false, false)
@@ -40,13 +41,13 @@ module.exports = ({userAuthenticationDataStore, emailService, userTokenExpiresIn
       })
     },
     refreshToken: ({token, audience}, callback) => {
-      jwt.verify(token, rsaPublicKeyPem, {issuer: issuer, audience: audience, algorithm: 'RS256'}, (err, user) => {
+      jwt.verify(token, rsaPublicKeyPem, {issuer: issuer, audience: audience, algorithm: 'RS256'}, (err, {uuid, type, verified}) => {
         if (err) {
           return callback(err, false)
         }
         // TODO: it should only sign a new token if the old one is older than 1 hour - we don't need to sign tokens on every request!
-        jwt.sign(user, rsaPrivateKeyPem, {expiresIn: userTokenExpiresIn, issuer: issuer, audience: audience, algorithm: 'RS256'}, (token) => {
-          callback(false, user, token)
+        jwt.sign({uuid, type, verified}, rsaPrivateKeyPem, {expiresIn: userTokenExpiresIn, issuer: issuer, audience: audience, algorithm: 'RS256'}, (err, token) => {
+          callback(err, {uuid, type, verified}, token)
         })
       })
     },
@@ -58,9 +59,9 @@ module.exports = ({userAuthenticationDataStore, emailService, userTokenExpiresIn
     createVerificationUrl: ({uuid, type, baseUrl}, callback) => {
       var audience = 'expect-verification-url'
       var credentials = {uuid, type}
-      jwt.sign(credentials, rsaPrivateKeyPem, {expiresIn: userTokenExpiresIn, issuer: issuer, audience: audience, algorithm: 'RS256'}, (token) => {
+      jwt.sign(credentials, rsaPrivateKeyPem, {expiresIn: userTokenExpiresIn, issuer: issuer, audience: audience, algorithm: 'RS256'}, (err, token) => {
         var verificationUrl = baseUrl + verificationPath.replace(':token', token)
-        callback(false, verificationUrl)
+        callback(err, verificationUrl)
       })
     },
     sendVerificationEmail: ({emailAddress, baseUrl}, callback) => {
@@ -90,9 +91,9 @@ module.exports = ({userAuthenticationDataStore, emailService, userTokenExpiresIn
     createResetPasswordUrl: ({uuid, type, baseUrl}, callback) => {
       var audience = 'expect-reset-password-url'
       var credentials = {uuid, type}
-      jwt.sign(credentials, rsaPrivateKeyPem, {expiresIn: '10m', issuer: issuer, audience: audience, algorithm: 'RS256'}, function (token) {
+      jwt.sign(credentials, rsaPrivateKeyPem, {expiresIn: '10m', issuer: issuer, audience: audience, algorithm: 'RS256'}, function (err, token) {
         var resetPasswordUrl = baseUrl + resetPasswordPath.replace(':token', token)
-        callback(false, resetPasswordUrl)
+        callback(err, resetPasswordUrl)
       })
     },
     sendResetPasswordEmail: ({emailAddress, baseUrl}, callback) => {

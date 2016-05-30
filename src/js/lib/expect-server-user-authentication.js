@@ -130,6 +130,7 @@ module.exports = function (options) {
         password: req.body.password
       }
       req.login(credentials, function (err, user) {
+        console.log(err, user)
         if (err) {
           return res.status(500).send(err)
         }

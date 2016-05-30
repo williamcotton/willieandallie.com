@@ -1,61 +1,61 @@
-module.exports = function (options) {
-  var request = options.request
-  // var localStorage = options.localStorage
-
+module.exports = function ({app, request, localStorage, document, window}) {
   /*
 
     browser-express app
     -------------------
 
-    expect-browser-react-renderer
-    -----------------------------
-
   */
 
   var express = require('browser-express')
-  var app = options.app || express({
+  app = app || express({
     interceptLinks: true,
     interceptFormSubmit: true,
-    document: options.document,
-    window: options.window
+    document,
+    window
   })
-
-  var expectReactRenderer = require('../lib/expect-browser-react-renderer')
 
   /*
 
     browser-express app middleware
     ------------------------------
 
-    expect-browser-react-renderer middleware
-    ----------------------------------------
-
   */
 
-  // expect-browser-react-renderer
-  app.use(expectReactRenderer({
-    RootComponent: require('../../jsx/root-component.jsx'),
-    app: app,
-    rootDOMId: 'universal-app-container',
-    document: options.document,
-    localStorage: options.localStorage
+  var expectReactRenderer = require('../lib/expect-browser-react-renderer')
+  var expectBrowserUserAuthentication = require('../lib/expect-browser-user-authentication')
+
+  var RootComponent = require('../../jsx/root-component.jsx')
+  var rootDOMId = 'universal-app-container'
+
+  // adds req.user
+  app.use(expectBrowserUserAuthentication({
+    localStorage,
+    app,
+    expectReactRenderer,
+    request
   }))
 
-  /*
+  // adds res.renderApp
+  app.use(expectReactRenderer({
+    RootComponent,
+    app,
+    rootDOMId,
+    document,
+    localStorage
+  }))
 
-    graphql
-    -------
-
-  */
-
-  var q = (query, callback) => {
-    return new Promise((accept, reject) => {
-      request({method: 'POST', url: '/q', body: query, headers: {'Content-Type': 'application/graphql'}}, (err, res) => {
-        if (err) { return reject(err) }
-        accept(JSON.parse(res.body))
+  // adds req.q
+  app.use((req, res, next) => {
+    req.q = (query, callback) => {
+      return new Promise((accept, reject) => {
+        request({method: 'POST', url: '/q', body: query, headers: {'Content-Type': 'application/graphql', 'x-csrf-token': req.csrf}}, (err, res) => {
+          if (err) { return reject(err) }
+          accept(JSON.parse(res.body))
+        })
       })
-    })
-  }
+    }
+    next()
+  })
 
   /*
 
@@ -65,7 +65,7 @@ module.exports = function (options) {
 
   */
 
-  var universalBrowserApp = require('../../jsx/universal-app.jsx')({app, q})
+  var universalBrowserApp = require('../../jsx/universal-app.jsx')({app})
 
   return universalBrowserApp
 }

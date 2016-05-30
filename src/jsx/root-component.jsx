@@ -1,4 +1,5 @@
-var React = require('react')
+const React = require('react')
+const {NavItem} = require('react-bootstrap')
 
 var RootComponent = React.createClass({
   propTypes: {
@@ -7,6 +8,11 @@ var RootComponent = React.createClass({
   },
   render: function () {
     var content = this.props.content
+    const navRight = this.props.user ? [
+      <NavItem key='/logout' href='/logout'>Logout</NavItem>
+    ] : [
+      <NavItem key='/login' href='/login'>Login</NavItem>
+    ]
     return <div className='root-component-container'>
       <header id='header' className='header navbar-fixed-top'>
         <div className='container '>
@@ -18,6 +24,7 @@ var RootComponent = React.createClass({
                 <li className='nav-item'><a className='scrollto' href='#music'>Music</a></li>
                 <li className='nav-item'><a className='scrollto' href='#video'>Video</a></li>
                 <li className='nav-item'><a className='scrollto' href='#contact'>Contact</a></li>
+                {navRight}
               </ul>
             </div>
           </nav>
