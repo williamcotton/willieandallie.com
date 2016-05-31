@@ -1,0 +1,95 @@
+/* ======= Music Section ======= */
+.music-section {
+    background: $smoky-white;
+    .sc-block {
+        max-width: 860px;
+        margin-bottom: 90px;
+        .item {
+            margin-bottom: 15px;
+            
+        }
+    }
+    .albums-block {
+        .item {
+            margin-bottom: 45px;
+        }
+        .item-inner {
+            position: relative;
+            padding-right: 60px;
+        }
+
+        .arrow-holder {
+            content: "";
+            display: block;
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 20px solid darken($theme-color, 30%);
+            position: absolute;
+            left: -10px;
+            top:37px;
+            bottom: -20px;
+        }
+
+        .cover-figure {
+            max-width: 235px;
+            max-height: 235px;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 15px;
+            background: $text-color-primary;
+            @include box-shadow(0 0 4px rgba(0, 0, 0, 0.5));
+            
+            .cover-image {
+                 position: relative;   
+                 @include opacity(0.95);
+            }
+            
+            .record-holder {
+                max-width: 235px;
+                max-height: 235px;
+                display: inline-block;
+                position: absolute;
+                right:-80px;
+                bottom: 0;
+                @include transition (all 0.6s ease-in-out);
+            }
+            
+            &:hover {
+                .cover-image {
+                    @include opacity(1);
+                }
+                .record-holder {
+                    right: -118px;
+                }
+            }
+        }
+
+        
+        .cover-label {
+            position: absolute;
+            left:-10px;
+            top: 0;
+            background: $theme-color;
+            color: #fff;
+            font-family: 'Raleway', sans-serif;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 12px;
+            padding: 10px;
+        }
+        .album-title {
+            font-size: 14px;
+            margin-bottom: 15px;
+            margin-top: 0;
+            text-align:center;
+            display: inline-block;
+        }
+        
+    }
+    
+    .music-action {
+        margin-top: 30px;
+    }
+}

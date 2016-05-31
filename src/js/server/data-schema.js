@@ -9,6 +9,8 @@ module.exports = ({databaseUrl}) => {
   })
   const bookshelf = require('bookshelf')(knex)
 
+  console.log(databaseUrl)
+
   /* Gigs */
 
   const gigType = objectType('GigType')

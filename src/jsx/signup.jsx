@@ -18,7 +18,7 @@ var Signup = React.createClass({
     var emailAlreadyExists = this.props.errors ? this.props.errors.indexOf('UUID_FOR_TYPE_EXISTS') > -1 : false
     var formAction = this.props.formAction
     var Form = this.props.Form
-    return <div className='signup-container'>
+    return <section className='auth-section section text-center'>
       <h1>Signup</h1>
       <Form action={formAction} method='post'>
         <input type='hidden' name='type' value='email' />
@@ -27,7 +27,7 @@ var Signup = React.createClass({
         <Input bsStyle={ passwordMismatch ? 'error' : null} name='repeatPassword' type='password' label='Repeat Password' autoFocus />
         <ButtonInput type='submit' value='Signup' />
       </Form>
-    </div>
+    </section>
   }
 })
 

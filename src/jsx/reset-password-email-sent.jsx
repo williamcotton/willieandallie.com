@@ -8,10 +8,10 @@ var ResetPasswordEmailSent = React.createClass({
     formAction: React.PropTypes.string
   },
   render: function () {
-    return <div className='reset-password-container'>
+    return <section className='auth-section section text-center'>
       <h1>Reset Password Email Sent</h1>
       <Alert bsStyle='success'>Please <strong>check your email</strong> for instructions on how to reset your password.</Alert>
-    </div>
+    </section>
   }
 })
 

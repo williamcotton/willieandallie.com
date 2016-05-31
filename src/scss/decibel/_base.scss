@@ -1,0 +1,242 @@
+/* ======= Base ======= */
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  color: $text-color-primary;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+header {
+  transition: all 90ms;
+  background-color: black;
+}
+
+header.didScroll {
+  
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 900;
+}
+
+p {
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+a {
+  color: $theme-color;
+  @include transition (all 0.4s ease-in-out);
+  &:hover, &:active {
+    text-decoration: underline;
+    color: darken($theme-color, 5%);        
+  }
+  &:focus {
+    text-decoration: none;
+    color: darken($theme-color, 5%); 
+    outline: none;
+  }
+}
+
+.btn, a.btn {
+  @include transition (all 0.4s ease-in-out);
+  @include border-radius(0);
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+a.btn-primary, .btn-primary { 
+  background: $theme-color;
+  border: 2px solid $theme-color;
+  color: #fff;
+  text-transform: uppercase;
+  @include box-shadow(inset 0 0 0 0 darken($theme-color, 15%));
+
+  &:hover {
+    @include box-shadow(inset 0 100px 0 0 darken($theme-color, 15%));
+  }
+
+  &:hover, &:active, &:focus {
+    background: darken($theme-color, 15%);
+    border: 2px solid darken($theme-color, 15%);
+    color: #fff;
+    outline: none;
+  }
+}
+
+a.btn-secondary, .btn-secondary { 
+  background: lighten($text-color-primary, 5%);
+  border: 2px solid lighten($text-color-primary, 5%);
+  color: #fff;
+  text-transform: uppercase;
+  @include box-shadow(inset 0 0 0 0 $theme-color);
+
+  &:hover {
+    @include box-shadow(inset 0 100px 0 0 darken($theme-color, 15%));
+  }
+
+  &:hover, &:active, &:focus {
+    background: darken($theme-color, 15%);
+    border: 2px solid darken($theme-color, 15%);
+    color: #fff;
+    outline: none;
+  }
+}
+
+
+a.btn-ghost-primary, .btn-ghost-primary { 
+  background: none;
+  border: 2px solid $theme-color;
+  color: $theme-color;
+  @include box-shadow(inset 0 0 0 0 $theme-color);
+  text-transform: uppercase;
+  &:active, &:focus {
+    border: 2px solid $theme-color;
+    color: $theme-color;
+    outline: none;
+  }
+  &:hover {
+    @include box-shadow(inset 0 100px 0 0 $theme-color);
+    background: $theme-color;
+    color: #fff;
+    border: 2px solid $theme-color;
+  }
+}
+
+a.btn-ghost-secondary, .btn-ghost-secondary { 
+  background: none;
+  border: 2px solid $text-color-primary;
+  color: $text-color-primary;
+  @include box-shadow(inset 0 0 0 0 $text-color-primary);
+  text-transform: uppercase;
+
+  &:active, &:focus {
+    border: 2px solid $text-color-primary;
+    outline: none;
+    color: $text-color-primary;
+  }
+
+  &:hover {
+    background: $text-color-primary;
+    @include box-shadow(inset 0 100px 0 0 $text-color-primary);
+    color: #fff;
+    border: 2px solid $text-color-primary;
+  }
+
+}
+
+a.btn-cta, .btn-cta {
+  font-size: 16px;
+  padding: 10px 30px;
+}
+
+
+.form-control {
+  @include box-shadow(none);
+  height: 45px;
+  border-color: $divider;
+  @include placeholder($grey);
+
+  &:focus {
+    border-color: darken($divider, 5%);
+    @include box-shadow(none);
+  }    
+}
+
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="submit"],
+input[type="button"], 
+textarea {
+  appearance: none;  /* for mobile safari */
+  -webkit-appearance: none;
+}
+
+label {
+  color: darken($theme-color, 5%);
+}
+
+
+form {
+  @media (max-width: 767px) {
+    padding: 10px;
+  }
+  input {
+    margin-right: 10px;
+    @media (max-width: 767px) {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+form input {
+  margin-right: 10px;
+}
+
+.form-group {
+  margin-bottom: 30px;
+}
+
+.highlight {
+  color: $theme-color;
+}
+
+#topcontrol {
+  @include transition (all 0.4s ease-in-out);
+  background: #fff;
+  border: 2px solid $text-color-primary;
+  color: $text-color-primary;
+  text-align: center;
+  display: inline-block;
+  z-index: 30;
+  width: 36px;
+  height: 36px;
+  &:hover {
+    background: $text-color-primary;
+    border: 2px solid $text-color-primary;
+    color: #fff;
+  }
+  .fa {
+    position: relative;
+    top: 2px;
+    font-size: 25px;
+    font-weight: bold;
+  }
+}
+
+/* Generic section styling */
+.section {
+  padding-top: 90px;
+  padding-bottom: 90px;
+}
+
+.section-title {
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 60px;
+  font-weight: 800;
+  font-size: 32px;
+  position: relative;
+  padding-bottom: 5px;
+  &:after {
+    content: "";
+    display: inline-block;
+    height: 4px;
+    width: 60px;
+    background: $theme-color;
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    margin-left: -30px;
+    @include border-radius(1px);
+  }
+}
+

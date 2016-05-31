@@ -1,0 +1,82 @@
+/* ======= Contact Section ======= */
+.contact-section {
+    background: $text-color-primary;
+    color:rgba(256, 256, 256, 0.75);
+    a {
+        color: rgba(256, 256, 256, 0.75);
+        &:hover {
+            color: $theme-color;
+        }
+    }
+    .section-title {
+        margin-bottom: 30px;
+        color: #fff;
+    }   
+    .section-intro {
+        max-width: 800px;
+        margin: 0 auto;
+        margin-bottom: 60px;
+        font-size: 16px;
+    }
+    
+    .contact-block {
+        max-width: 800px;
+        margin-bottom: 90px;
+        .item {
+            margin-bottom: 30px;
+        }
+        .title {
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #fff;
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+        .icon-holder {
+            margin-bottom: 15px;
+        }
+        .fa {
+            margin-right: 5px;
+            color: $theme-color;
+            font-size: 24px;
+        }
+    }
+    
+    .channels-list {
+        margin-bottom: 45px;
+        li {
+            margin-right: 15px;
+            margin-bottom: 15px;
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+        a {
+            @include opacity(0.4);
+            &:hover {
+                @include opacity(1);
+            }
+        }
+    }
+    
+    .social-media-list {
+        margin-bottom: 0;
+        a {
+            color:rgba(256, 256, 256, 0.4);
+            &:hover {
+                color: #fff;
+            }
+        }
+        li {
+            margin-right: 15px;
+            margin-bottom: 15px;
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+        .fa {
+            font-size: 36px;
+        }
+    }
+    
+}

@@ -1,0 +1,87 @@
+/* ======= Gigs Section ======= */
+.gigs-section {
+    .container {
+        max-width: 860px;
+    }
+    .item {
+        position: relative;
+        padding-left: 60px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid $divider;
+    }
+    .date-label {
+        background: $text-color-primary;
+        color: #fff;
+        text-align: center;
+        display: inline-block;
+        width: 45px;
+        height: 55px;
+        padding-top: 4px;
+        position: absolute;
+        left: 0;
+        top: 15px;
+        .number {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .month {
+            font-size: 12px;
+            font-weight: 600;
+            font-family: 'Raleway', sans-serif;
+            color: rgba(256, 256, 256, 0.8);
+        }
+    }
+    
+    .gig-title {
+        font-size: 16px;
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-weight: 700;
+    }
+    
+    .meta-list {
+        color: $text-color-grey;
+        a {
+            color: $text-color-grey;
+        }
+        .fa {
+            margin-right: 5px;
+            color: $theme-color;
+            font-size: 16px;
+        }
+    }
+    
+    .gig-actions {
+        position: absolute;
+        right: 0;
+        top: 15px;
+        .btn {
+            margin-right: 5px;
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+    .info-extra {
+        color: $text-color-secondary;
+        font-size: 16px;
+    }
+    
+    .gigs-contact {
+        margin-top: 60px;
+        .title {
+            font-size: 18px;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        .intro {
+            font-size: 16px;
+            color: $text-color-secondary;
+            max-width: 800px;
+        }
+        .btn {
+            margin-top: 15px;
+        }
+    }
+}

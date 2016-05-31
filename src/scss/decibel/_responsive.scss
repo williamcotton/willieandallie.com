@@ -1,0 +1,165 @@
+/* Extra small devices (phones, less than 768px) */
+@media (max-width: 767px) { 
+    .header {
+        background:rgba(0, 0, 0, 0.9);
+        padding-top: 5px;
+    }
+    .navbar-collapse {
+       @include box-shadow(none);
+    }
+    .nav > li.active > a {
+        color: $theme-color;
+    }
+    .promo-section {
+        min-height: 900px;
+    }
+    .promo-content {
+        padding-top: 0px;
+    }
+    .promo-content .headline {
+      font-size: 60px;
+    }
+    .promo-content .tagline {
+      font-size: 13px;
+    }
+    .updates-block {
+        position: static;
+        height: inherit;
+        min-height: 400px;
+    }
+    .updates-block .media-holder {
+        position: static;
+        margin: 0 auto;
+        margin-bottom: 30px;
+    }
+    .updates-block .carousel-content {
+        padding-left: 0;
+    }
+  
+    .updates-block .carousel-content .btn-cta {
+        position: static;
+    }
+    .updates-block .carousel .item {
+        height: inherit;
+    }
+    .updates-block .glyphicon-chevron-right {
+        right: -45px;
+    }
+    .updates-block .glyphicon-chevron-left {
+        left: -45px;
+    }
+    .gigs-section .gig-actions {
+        position: static;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+  
+    .contact-section .social-media-list li {
+        margin-bottom: 15px;
+    }
+    .contact-section .social-media-list .fa {
+        font-size: 24px;
+        
+    }
+    .about-section .item-inner {
+        padding: 15px;
+    }
+    
+    .merch-section .mask-inner {
+        padding-top: 30px;
+    }
+    
+    .music-section .albums-block .item-inner {
+        padding: 0px;
+    }
+    
+    .music-section .albums-block .album-title {
+        max-width: 290px;
+    }
+    
+    .music-section .albums-block .cover-figure {
+        max-width: 100%;
+        max-height: inherit;
+    }
+    
+    .music-section .albums-block .cover-figure .record-holder {
+        display: none;
+    }
+    
+    .contact-section .channels-list .icon {
+        height: 15px;
+    }
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+    
+    .modal-dialog {
+        width: 700px;
+    }
+    
+    .navbar-nav {
+        float: none;
+    }
+    .promo-content {
+        padding-top: 30px;
+    }
+    .updates-block {
+       height: 260px;
+    }
+    .updates-block .carousel-content .btn-cta {
+       position: static;
+    }
+    .updates-block .carousel .item {
+       height: 200px
+    }
+    .updates-block .glyphicon-chevron-right {
+       right: -45px;
+    }
+    .updates-block .glyphicon-chevron-left {
+       left: -45px;
+    }
+    .music-section .albums-block .cover-figure .record-holder {
+        right: -60px;
+    }
+    .music-section .albums-block .cover-figure:hover .record-holder {
+        right: -80px;
+    }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .promo-section {
+        margin-top: 70px;
+    }
+    .promo-content {
+        padding-top: 80px;
+    }
+    .updates-block {
+       height: 160px;
+    }
+    .updates-block .carousel-content .btn-cta {
+       position: absolute;
+    }
+    .updates-block .carousel .item {
+       height: 100px
+    }
+    .updates-block .glyphicon-chevron-right {
+       right: -60px;
+    }
+    .updates-block .glyphicon-chevron-left {
+       left: -60px;
+    }
+    .music-section .albums-block .cover-figure .record-holder {
+        right: -80px;
+    }
+    .music-section .albums-block .cover-figure:hover .record-holder {
+        right: -118px;
+    }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+    
+}

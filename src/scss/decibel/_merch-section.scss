@@ -1,0 +1,65 @@
+/* ======= Merch Section ======= */
+.merch-section {
+    background: $smoky-white;
+    .item {
+        margin-bottom: 30px;
+        .item-inner {
+            position: relative;
+        }
+        
+        &:hover {
+            .mask {
+                visibility:visible;
+                @include opacity(1);
+            }
+        }
+    }
+
+    .mask {
+        visibility: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        color: #fff;
+        text-decoration: none;
+        @include transition (all 0.4s ease-in-out);
+        @include opacity(0);
+        
+        .item-title {
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 5px;
+            font-family: 'Raleway', sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        .desc {
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+        
+        span {
+            display: block;
+            &.btn {
+                display: inline-block;
+            }
+        }
+    }
+    .mask-inner {
+        background: rgba(red($text-color-primary), green($text-color-primary), blue($text-color-primary), 0.8);
+        padding: 30px;
+        padding-top: 45px;
+        height: 100%;
+        overflow:hidden;
+        color: #fff;
+    }
+    
+    .merch-action {
+        margin-top: 30px;
+    }
+
+}

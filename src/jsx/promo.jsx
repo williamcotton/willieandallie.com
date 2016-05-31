@@ -20,6 +20,7 @@ module.exports = class Promo extends React.Component {
   render () {
     var images = this.props.images
     return <section id='promo' className='promo-section section'>
+      <div className='screen'></div>
       <div className='slides'>
         <div className='slide' style={{'backgroundImage': `url(${images[this.state.imageIndex]})`}} />
       </div>

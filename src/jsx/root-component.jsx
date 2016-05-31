@@ -6,6 +6,11 @@ var RootComponent = React.createClass({
     user: React.PropTypes.object,
     content: React.PropTypes.element
   },
+  getInitialState: () => {
+    return {
+      didScroll: false
+    }
+  },
   render: function () {
     var content = this.props.content
     const navRight = this.props.user ? [
@@ -13,17 +18,18 @@ var RootComponent = React.createClass({
     ] : [
       <NavItem key='/login' href='/login'>Login</NavItem>
     ]
+    var headerClass = 'header navbar-fixed-top' + (this.state.didScroll ? ' didScroll' : '')
     return <div className='root-component-container'>
-      <header id='header' className='header navbar-fixed-top'>
+      <header id='header' className={headerClass}>
         <div className='container '>
           <nav className='main-nav' role='navigation'>
             <div id='navbar-collapse' className='navbar-collapse collapse text-center'>
               <ul className='nav navbar-nav center-block'>
-                <li className='nav-item'><h3><a className='scrollto' href='#promo'>Willie & Allie</a></h3></li>
-                <li className='nav-item'><a className='scrollto' href='#gigs'>Gigs</a></li>
-                <li className='nav-item'><a className='scrollto' href='#music'>Music</a></li>
-                <li className='nav-item'><a className='scrollto' href='#video'>Video</a></li>
-                <li className='nav-item'><a className='scrollto' href='#contact'>Contact</a></li>
+                <li className='nav-item'><h3><a className='scrollto' href='/#promo'>Willie & Allie</a></h3></li>
+                <li className='nav-item'><a className='scrollto' href='/#gigs'>Gigs</a></li>
+                <li className='nav-item'><a className='scrollto' href='/#music'>Music</a></li>
+                <li className='nav-item'><a className='scrollto' href='/#video'>Video</a></li>
+                <li className='nav-item'><a className='scrollto' href='/#contact'>Contact</a></li>
                 {navRight}
               </ul>
             </div>

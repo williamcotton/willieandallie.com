@@ -1,0 +1,233 @@
+/* ======= Promo Section ======= */
+.vegas-timer-progress {
+  background: $theme-color;
+}
+.promo-section {
+  height: 100%;
+  min-height: 660px;
+  width: 100%;
+  position: relative;
+  color: #fff;  
+  overflow: hidden!important;
+  background-color: rgba(0,0,0,0.2);
+}
+
+.screen {
+  background-image: url(/images/08.png);
+  background-repeat: repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 0;
+  opacity: 0.7;
+}
+
+.slide {
+  position: absolute;
+  overflow: hidden;
+  background-position: 50% 50%;
+  background-size: cover;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  transform: scale(1);
+  opacity: 1;
+  transition: all 3000ms;
+  z-index: -1;
+}
+
+.zoomedIn {
+  transform: scale(2);
+  opacity: 0;
+}
+
+.logo-holder {
+ height: 100px;
+ text-align: center;
+ background-color: transparent;
+ background-position: center center;
+ background-repeat: no-repeat;
+ margin-top: 0;
+ margin-bottom: 30px;
+ text-indent: -9999px;
+ overflow: hidden;
+}
+
+.promo-content {
+  position: relative;
+  padding-top: 80px;
+  .headline {
+    font-size: 108px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+    font-family: smokum;
+    font-weight: normal;
+  }  
+  .tagline {
+    font-size:24px;
+    margin-bottom: 90px;
+  }
+}
+
+.updates-block {
+  position: absolute;
+  bottom: 2px;
+  width: 100%;
+  height: 160px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+
+  .updates-block-inner {
+    padding-left: 60px;
+    padding-right: 60px;
+    position: relative;
+  }
+
+  .carousel-inner {
+    min-height: 100px;
+  }
+  .media-holder {
+    display: inline-block;
+    position: absolute;
+    width: 170px;
+    height: 100px;
+    left: 0;
+  }
+  .media-thumb {
+    position: relative;
+  }
+  .video-play-trigger {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    left: 50%;
+    margin-left: -18px;
+    text-align: center;
+    z-index:5;
+    top: 50%;
+    margin-top: -18px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.8);
+    @include border-radius(50%);
+    cursor: pointer;
+    &:hover {
+      background: rgba(red($theme-color), green($theme-color), blue($theme-color), 0.6);
+    }
+    .fa {
+      color: #fff;
+      font-size: 16px;
+      padding-top: 10px;
+      padding-left: 4px;
+    }
+
+  }
+
+  .glyphicon {
+    margin: 0;
+    margin-top: -20px;
+  }
+
+  .glyphicon-chevron-left {
+    background: transparent url('../images/left-arrow.svg') no-repeat left top;
+    width: 23px;
+    height: 40px;
+    left:-60px;
+    &:before {
+      display: none;
+    }
+  }
+
+  .glyphicon-chevron-right {
+    background: transparent url('../images/right-arrow.svg') no-repeat right top;
+    width: 23px;
+    height: 40px;
+    right: -60px;
+    &:before {
+      display: none;
+    }
+  }
+
+  .carousel-control {
+    display: inline-block;
+    width: 23px;
+    height: 100px;
+    @include opacity(0.25);
+    text-shadow: none;
+    &:hover {
+      @include opacity(0.6);
+    }
+
+    &.right {
+      background-image : none;
+    }
+    &.left {
+      background-image : none;
+    }
+  }
+  .carousel {
+    .item {
+      height: 100px;
+    }
+  }
+
+  .carousel-content {
+    padding-left: 200px;
+    max-width: 760px;
+
+    &.no-media-holder {
+      padding-left: 0;
+      max-width: 620px;
+      .title {
+        margin-bottom: 15px;
+      }
+    }
+    .title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-top: 0;
+      margin-bottom: 5px;
+    }
+    .btn-cta {
+      position: absolute;
+      right:0;
+      top: 30px;
+    }
+    .desc {
+      color: rgba(256, 256, 256, 0.6);
+      a {
+        color: #fff;
+        &.more-link {
+          color: $theme-color;
+          vertical-align: middle;
+          &:hover {
+            color: darken($theme-color, 10%);
+          }
+        }
+      }
+    }
+
+    .highlight {
+      color: $theme-color;
+    }
+  }
+}
+
+.countdown-box {
+  font-size: 16px;
+  .number {
+    font-weight: 700;
+    color: $theme-color;
+    font-size: 24px;
+  }
+  .unit {
+    color: rgba(256, 256, 256, 0.6);
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 14px;
+  }
+}
+

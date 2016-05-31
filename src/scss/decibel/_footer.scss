@@ -1,0 +1,19 @@
+/* ======= Footer ======= */
+.footer {
+    background: darken($text-color-primary, 10%);
+    font-weight: normal;
+    color: rgba(256, 256, 256, 0.6);
+    .container {
+        
+    }
+    a {
+        color: $theme-color;
+        &:hover {
+            color: darken($theme-color, 10%);
+        } 
+    }
+}
+
+.footer-content {
+    padding: 15px;
+}

@@ -1,0 +1,84 @@
+/* ======= Modal ======= */
+.modal-body {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    font-size: 16px;
+    color: $text-color-secondary;
+    iframe {
+        max-width: 100%;
+    }
+}
+
+.modal-content {
+    @include border-radius(0);
+}
+
+.modal-header {
+    border: none;
+    padding-top: 30px;
+    position: relative; 
+}
+
+.modal button.close {
+    font-size: 36px;
+    font-weight:300;
+    text-shadow:none;
+    background: none;
+    position: absolute;
+    right: 12px;
+    top: 7px;
+    z-index:10;
+    @include opacity(0.6);
+    &:hover {
+        @include opacity(1);
+    }
+}
+
+.modal-backdrop.in {
+        @include opacity(0.9);
+}
+
+.modal {
+    
+    &.modal-video {
+        .modal-dialog {
+            margin-top: 90px;
+        }
+        .modal-body {
+            padding: 0;
+            padding-top: 0;
+        }
+        .modal-header {
+            border: none;
+            padding: 0;          
+        }
+        .modal-content {
+            background: none;
+            border: none;
+            @include box-shadow(none);
+        }
+        
+        button.close {
+            color: #fff;
+            @include opacity(0.6);
+            background: none;
+            position: absolute;
+            top: inherit;
+            right: 0px;
+            bottom: 5px;
+            z-index:10;
+            &:hover {
+                @include opacity(1);
+            }
+        }
+
+    }
+    
+}
+
+
+
+
+
+

@@ -6,6 +6,7 @@ var Gigs = require('./gigs.jsx')
 var Music = require('./music.jsx')
 var Video = require('./video.jsx')
 var Contact = require('./contact.jsx')
+
 var Signup = require('./signup.jsx')
 var Welcome = require('./welcome.jsx')
 var Login = require('./login.jsx')

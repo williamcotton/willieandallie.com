@@ -17,7 +17,7 @@ var Login = React.createClass({
     var updatePasswordSuccess = this.props.updatePasswordSuccess
     var formAction = this.props.formAction
     var Form = this.props.Form
-    return <section className='section text-center'>
+    return <section className='auth-section section text-center'>
       <h1>Login</h1>
       { updatePasswordSuccess ? <Alert bsStyle='success'>You have successfully reset your password.</Alert> : false }
       <Form action={formAction} method='post'>

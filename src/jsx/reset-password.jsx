@@ -13,7 +13,7 @@ var ResetPassword = React.createClass({
   render: function () {
     var formAction = this.props.formAction
     var Form = this.props.Form
-    return <div className='reset-password-container'>
+    return <section className='auth-section section text-center'>
       <h1>Reset Password</h1>
       { this.props.expired ? <Alert bsStyle='warning'>Your password reset token has expired. Please start over.</Alert> : false }
       <Form action={formAction} method='post'>
@@ -22,7 +22,7 @@ var ResetPassword = React.createClass({
         <Input name='uuid' type='text' label='Email Address' />
         <ButtonInput type='submit' value='Send Reset Password Email' />
       </Form>
-    </div>
+    </section>
   }
 })
 

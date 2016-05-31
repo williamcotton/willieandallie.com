@@ -22,7 +22,7 @@ module.exports = function ({app, defaultTitle, dataSchema, userAuthenticationSer
   var expectReactRenderer = require('../lib/expect-server-react-renderer')
   var expectServerUserAuthentication = require('../lib/expect-server-user-authentication')
 
-  var verificationSuccessPath = '/welcome'
+  var verificationSuccessPath = '/'
   var newPasswordPath = '/new-password'
   var RootComponent = require('../../jsx/root-component.jsx')
   var rootDOMId = 'universal-app-container'
@@ -50,7 +50,7 @@ module.exports = function ({app, defaultTitle, dataSchema, userAuthenticationSer
   })
   app.use((req, res, next) => {
     req.q = (query, callback) => {
-      var user = req.user
+      var user = req && req.user ? req.user : {}
       return grapqlService(query, {user})
     }
     next()

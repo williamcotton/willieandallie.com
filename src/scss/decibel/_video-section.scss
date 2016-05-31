@@ -1,0 +1,12 @@
+/* ======= Video Section ======= */
+.video-section {
+  iframe {
+    width: 640px;
+    height: 360px;
+    @media (max-width: 767px) { 
+      width: 260px;
+      height: 150px;
+    }
+    margin-bottom: 30px;
+  }
+}
