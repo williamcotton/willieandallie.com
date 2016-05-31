@@ -30,6 +30,9 @@ var RootComponent = React.createClass({
           }
         }
         window.addEventListener('scroll', onscroll)
+        if (!this.state.didScroll && document.body.scrollTop > 0) {
+          this.setState({didScroll: true})
+        }
       }}>
         <div className='container '>
           <nav className='main-nav' role='navigation'>
