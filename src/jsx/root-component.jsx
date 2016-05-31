@@ -20,7 +20,17 @@ var RootComponent = React.createClass({
     ]
     var headerClass = 'header navbar-fixed-top' + (this.state.didScroll ? ' didScroll' : '')
     return <div className='root-component-container'>
-      <header id='header' className={headerClass}>
+      <header id='header' className={headerClass} ref={(e) => {
+        let onscroll = (event) => {
+          if (!this.state.didScroll && event.target.body.scrollTop > 0) {
+            this.setState({didScroll: true})
+          }
+          if (this.state.didScroll && event.target.body.scrollTop === 0) {
+            this.setState({didScroll: false})
+          }
+        }
+        window.addEventListener('scroll', onscroll)
+      }}>
         <div className='container '>
           <nav className='main-nav' role='navigation'>
             <div id='navbar-collapse' className='navbar-collapse collapse text-center'>

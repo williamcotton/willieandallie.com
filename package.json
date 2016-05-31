@@ -80,6 +80,7 @@
     "on-headers": "^1.0.1",
     "pg": "^4.5.5",
     "react": "^15.1.0",
+    "react-addons-css-transition-group": "^15.1.0",
     "react-addons-test-utils": "^15.1.0",
     "react-bootstrap": "^0.29.4",
     "react-dom": "^15.1.0",
