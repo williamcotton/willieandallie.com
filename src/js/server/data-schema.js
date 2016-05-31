@@ -1,5 +1,4 @@
-const {GraphQLString, GraphQLInt, GraphQLBoolean} = require('graphql')
-const {objectType, schemaFrom, listOf, notNull} = require('graphql-schema')
+const {GraphQLString, GraphQLBoolean, GraphQLList, GraphQLNonNull, GraphQLSchema, GraphQLObjectType} = require('graphql')
 
 module.exports = ({databaseUrl}) => {
   const knex = require('knex')({
@@ -9,75 +8,93 @@ module.exports = ({databaseUrl}) => {
   })
   const bookshelf = require('bookshelf')(knex)
 
-  console.log(databaseUrl)
-
   /* Gigs */
-
-  const gigType = objectType('GigType')
-    .field('id', notNull(GraphQLString), 'Gig id')
-    .field('title', notNull(GraphQLString), 'Gig title')
-    .field('day', notNull(GraphQLInt), 'Gig day of month')
-    .field('month', notNull(GraphQLString), 'Gig 3-letter (JAN,FEB) name of month')
-    .field('location', notNull(GraphQLString), 'Gig location')
-    .field('time', notNull(GraphQLString), 'Gig start time')
-    .field('extraInfo', GraphQLString, 'Gig extra information')
-    .field('ticketUrl', GraphQLString, 'Gig URL for tickect sales')
-    .end()
-
+  const gigType = new GraphQLObjectType({
+    name: 'GigType',
+    fields: () => ({
+      id: { type: new GraphQLNonNull(GraphQLString) },
+      title: { type: new GraphQLNonNull(GraphQLString) },
+      day: { type: new GraphQLNonNull(GraphQLString) },
+      month: { type: new GraphQLNonNull(GraphQLString) },
+      location: { type: new GraphQLNonNull(GraphQLString) },
+      time: { type: new GraphQLNonNull(GraphQLString) },
+      extraInfo: { type: GraphQLString },
+      ticketUrl: { type: GraphQLString }
+    })
+  })
   const Gig = bookshelf.Model.extend({
     tableName: 'gigs'
   })
 
   /* EmailListSignups */
-
-  const emailListSignupType = objectType('EmailListSignupType')
-    .field('emailAddress', notNull(GraphQLString), 'Email Address')
-    .end()
-
+  const emailListSignupType = new GraphQLObjectType({
+    name: 'EmailListSignupType',
+    fields: () => ({
+      emailAddress: { type: new GraphQLNonNull(GraphQLString) }
+    })
+  })
   const EmailListSignup = bookshelf.Model.extend({
     tableName: 'emailListSignups'
   })
 
   /* query */
-
-  const queryType = objectType('QueryRoot')
-    .field('upcomingGigs', listOf(gigType))
-      .arg('includePast', GraphQLBoolean)
-      .resolve(({user}, data, context) => {
-        return Gig
-          .query('orderBy', 'id', 'asc')
-          .fetchAll()
-          .then(gigs => gigs.toJSON())
-      })
-    .end()
+  const queryType = new GraphQLObjectType({
+    name: 'QueryRoot',
+    fields: () => ({
+      upcomingGigs: {
+        type: new GraphQLList(gigType),
+        args: {
+          includePast: { type: GraphQLBoolean }
+        },
+        resolve ({user}, data) {
+          return Gig
+            .query('orderBy', 'id', 'asc')
+            .fetchAll()
+            .then(gigs => gigs.toJSON())
+        }
+      }
+    })
+  })
 
   /* mutation */
-
-  const mutationType = objectType('MutationRoot')
-    .field('newEmailListSignup', emailListSignupType)
-      .arg('emailAddress', notNull(GraphQLString))
-      .resolve(({user}, {emailAddress}) => {
-        let createdAt = new Date()
-        return new EmailListSignup({emailAddress, createdAt})
-          .save()
-          .then(model => model.toJSON())
-      })
-    .field('newGig', emailListSignupType)
-      .arg('title', notNull(GraphQLString))
-      .arg('day', notNull(GraphQLInt))
-      .arg('month', notNull(GraphQLString))
-      .arg('location', notNull(GraphQLString))
-      .arg('time', notNull(GraphQLString))
-      .arg('extraInfo', GraphQLString)
-      .arg('ticketUrl', GraphQLString)
-      .resolve(({user}, gigData) => {
-        return new Gig(gigData)
-          .save()
-          .then(model => model.toJSON())
-      })
-    .end()
+  const mutationType = new GraphQLObjectType({
+    name: 'MutationRoot',
+    fields: () => ({
+      newEmailListSignup: {
+        type: emailListSignupType,
+        args: {
+          emailAddress: { type: new GraphQLNonNull(GraphQLString) }
+        },
+        resolve ({user}, {emailAddress}) {
+          let createdAt = new Date()
+          return new EmailListSignup({emailAddress, createdAt})
+            .save()
+            .then(model => model.toJSON())
+        }
+      },
+      newGig: {
+        type: gigType,
+        args: {
+          title: { type: new GraphQLNonNull(GraphQLString) },
+          day: { type: new GraphQLNonNull(GraphQLString) },
+          month: { type: new GraphQLNonNull(GraphQLString) },
+          location: { type: new GraphQLNonNull(GraphQLString) },
+          time: { type: new GraphQLNonNull(GraphQLString) },
+          extraInfo: { type: GraphQLString },
+          ticketUrl: { type: GraphQLString }
+        },
+        resolve ({user}, gigData) {
+          return new Gig(gigData)
+            .save()
+            .then(model => model.toJSON())
+        }
+      }
+    })
+  })
 
   /* schema */
-
-  return schemaFrom(queryType, mutationType)
+  return new GraphQLSchema({
+    query: queryType,
+    mutation: mutationType
+  })
 }

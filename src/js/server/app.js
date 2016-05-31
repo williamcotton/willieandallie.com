@@ -41,7 +41,24 @@ module.exports = function ({app, defaultTitle, dataSchema, userAuthenticationSer
     RootComponent,
     app,
     defaultTitle,
-    rootDOMId
+    rootDOMId,
+    template: `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title><%- title %></title>
+  <link href="/build.css" rel="stylesheet" type="text/css">
+  <script src="//use.edgefonts.net/smokum.js"></script>
+  <script type="text/javascript">
+    window.incomingMessage = <%- JSON.stringify(incomingMessage) %>
+  </script>
+</head>
+<body>
+  <div id="<%- rootDOMId %>"><%- HTML %></div>
+  <% if (typeof(dontLoadJS) === 'boolean' && !dontLoadJS) { %><script src='/build.js' type='text/javascript' charset='utf-8'></script><% } %>
+</body>
+</html>`
   }))
 
   // adds req.q

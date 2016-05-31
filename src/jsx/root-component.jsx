@@ -6,12 +6,12 @@ var RootComponent = React.createClass({
     user: React.PropTypes.object,
     content: React.PropTypes.element
   },
-  getInitialState: () => {
+  getInitialState () {
     return {
       didScroll: false
     }
   },
-  render: function () {
+  render () {
     var content = this.props.content
     const navRight = this.props.user ? [
       <NavItem key='/logout' href='/logout'>Logout</NavItem>
@@ -22,15 +22,17 @@ var RootComponent = React.createClass({
     return <div className='root-component-container'>
       <header id='header' className={headerClass} ref={(e) => {
         let onscroll = (event) => {
-          if (!this.state.didScroll && event.target.body.scrollTop > 0) {
+          var scrollTop = event.target.documentElement.scrollTop || event.target.body.scrollTop
+          if (!this.state.didScroll && scrollTop > 0) {
             this.setState({didScroll: true})
           }
-          if (this.state.didScroll && event.target.body.scrollTop === 0) {
+          if (this.state.didScroll && scrollTop === 0) {
             this.setState({didScroll: false})
           }
         }
         window.addEventListener('scroll', onscroll)
-        if (!this.state.didScroll && document.body.scrollTop > 0) {
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+        if (!this.state.didScroll && scrollTop > 0) {
           this.setState({didScroll: true})
         }
       }}>

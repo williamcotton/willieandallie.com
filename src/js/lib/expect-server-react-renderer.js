@@ -23,7 +23,7 @@ var reactRenderApp = function (options) {
   var React = require('react')
   var ReactDOMServer = require('react-dom/server')
   var ejs = require('ejs')
-  var template = defaultTemplate || options.template
+  var template = options.template || defaultTemplate
   var RootComponent = options.RootComponent ? React.createFactory(options.RootComponent) : React.createClass({propTypes: { content: React.PropTypes.element }, render: function () { return React.DOM.div({ className: 'universal-app-container' }, this.props.content) }})
   var formatTitle = options.formatTitle || function (defaultTitle, title) { return defaultTitle + (title ? ' - ' + title : '') }
   return function reactRenderer (req, res, next) {
