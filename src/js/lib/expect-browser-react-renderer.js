@@ -9,6 +9,8 @@ var reactRenderApp = function (options) {
   var app = options.app
   var formatTitle = options.formatTitle || function (defaultTitle, title) { return defaultTitle + (title ? ' - ' + title : '') }
   return function (req, res, next) {
+    var Form = require('../../jsx/lib/form.jsx')(req, res)
+    res.Form = Form
     res.redirect = app.navigate
     res.send = function (data) {
       if (typeof data === 'object') {
@@ -27,7 +29,7 @@ var reactRenderApp = function (options) {
       async.each(middlewareStack, function (middlewareFunction, callback) {
         middlewareFunction(req, res, contentProps, rootProps, callback)
       }, function () {
-        contentProps.Form = require('../../jsx/lib/form.jsx')(req, res, rootProps, contentProps)
+        contentProps.Form = Form
         var contentWithProps
         if (typeof content.type === 'string') {
           contentWithProps = content

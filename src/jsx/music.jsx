@@ -12,8 +12,8 @@ module.exports = class Music extends React.Component {
           <div classNae='cover-holder'>
             <a className='cover-figure' href='#'>
               <div className='arrow-holder'></div>
-              <div className='record-holder'><img className='img-responsive' src='assets/images/record.png' alt='' /></div>
-              <img className='cover-image img-responsive' src='images/temp-album.jpg' alt='' />
+              <div className='record-holder'><img className='img-responsive' src='/images/record.png' alt='' /></div>
+              <img className='cover-image img-responsive' src='/images/temp-album.jpg' alt='' />
               <div className='cover-label'>Coming Soon</div>
             </a>
             <br />

@@ -68,7 +68,7 @@ module.exports = function (options) {
 
   // expect-server-outgoing-message
   app.use(function expectServerOutgoingMessage (req, res, next) {
-    res.outgoingMessage = {}
+    res.outgoingMessage = res.outgoingMessage ? res.outgoingMessage : {}
     res.outgoingMessage.method = req.method
     if (req.body) {
       res.outgoingMessage.body = req.body

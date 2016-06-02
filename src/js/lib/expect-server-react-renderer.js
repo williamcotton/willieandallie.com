@@ -27,6 +27,8 @@ var reactRenderApp = function (options) {
   var RootComponent = options.RootComponent ? React.createFactory(options.RootComponent) : React.createClass({propTypes: { content: React.PropTypes.element }, render: function () { return React.DOM.div({ className: 'universal-app-container' }, this.props.content) }})
   var formatTitle = options.formatTitle || function (defaultTitle, title) { return defaultTitle + (title ? ' - ' + title : '') }
   return function reactRenderer (req, res, next) {
+    var Form = require('../../jsx/lib/form.jsx')(req, res)
+    res.Form = Form
     res.outgoingMessage = res.outgoingMessage ? res.outgoingMessage : {}
     res.outgoingMessage.defaultTitle = options.defaultTitle
     var navigate = function (pathname) {
@@ -41,7 +43,7 @@ var reactRenderApp = function (options) {
       async.each(middlewareStack, function (middlewareFunction, callback) {
         middlewareFunction(req, res, contentProps, rootProps, callback)
       }, function () {
-        contentProps.Form = require('../../jsx/lib/form.jsx')(req, res, rootProps, contentProps)
+        contentProps.Form = Form
         var contentWithProps
         if (typeof content.type === 'string') {
           contentWithProps = content

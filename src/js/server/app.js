@@ -68,7 +68,14 @@ module.exports = function ({app, defaultTitle, dataSchema, userAuthenticationSer
   app.use((req, res, next) => {
     req.q = (query, callback) => {
       var user = req && req.user ? req.user : {}
-      return grapqlService(query, {user})
+      return new Promise((accept, reject) => {
+        grapqlService(query, {user}).then(result => {
+          res.outgoingMessage = res.outgoingMessage ? res.outgoingMessage : {}
+          res.outgoingMessage.qCache = res.outgoingMessage.qCache ? res.outgoingMessage.qCache : {}
+          res.outgoingMessage.qCache[query] = result
+          accept(result)
+        }, reject)
+      })
     }
     next()
   })

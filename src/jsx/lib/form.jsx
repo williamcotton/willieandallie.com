@@ -1,5 +1,5 @@
 var React = require('react')
-module.exports = function (req, res, rootProps, contentProps) {
+module.exports = (req, res) => {
   var Form = React.createClass({
     propTypes: {
       action: React.PropTypes.string,
@@ -27,7 +27,7 @@ module.exports = function (req, res, rootProps, contentProps) {
       res.onLoad = this.props.onLoad
       res.onError = this.props.onError
       res.onAbort = this.props.onAbort
-      return <form action={action} method={method} encType={encType}>
+      return <form action={action} method={method} encType={encType} className={this.props.className}>
         { req.csrf ? <input type='hidden' name='_csrf' value={req.csrf} /> : false }
         { this.props.children }
       </form>
