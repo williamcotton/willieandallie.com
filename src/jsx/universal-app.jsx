@@ -15,7 +15,7 @@ var NewPassword = require('./new-password.jsx')
 var ResetPasswordEmailSent = require('./reset-password-email-sent.jsx')
 
 var universalApp = ({app}) => {
-  app.get('/', ({q, query: {didSignUp}}, {renderApp}) => {
+  app.get('/', ({q, query: {didSignUp, emailAddress}}, {renderApp}) => {
     q('{ upcomingGigs { title, day, month, location, time, extraInfo, ticketUrl } }').then(({data: {upcomingGigs}}) => {
       renderApp(<div>
         <Promo
@@ -31,13 +31,14 @@ var universalApp = ({app}) => {
         <Gigs
           gigs={upcomingGigs}
         />
-        <section className='section text-center center-block'>
+        <section className='mailing-list-section section text-center center-block'>
           <h3>Mailing List Signup</h3>
           <p>Signup to receive emails about new releases and gigs!</p>
           <form action='/newEmailListSignup' method='post' className='form-inline has-warning'>
             <input placeholder='jane.doe@example.com' name='emailAddress' type='email' className='form-control form-control-warning' />
             <button type='submit' className='btn btn-ghost-primary'>Sign Up</button>
           </form>
+          { didSignUp ? <p className='alert alert-success'>{emailAddress} has been added to our email list.</p> : false}
         </section>
         <Music />
         <Video />
@@ -55,9 +56,7 @@ var universalApp = ({app}) => {
 
   app.post('/newEmailListSignup', ({q, body: {emailAddress}}, {redirect, send}) => {
     q(`mutation { newEmailListSignup(emailAddress: "${emailAddress}") { emailAddress } }`).then((res) => {
-      console.log('newEmailListSignup result', res)
-      //redirect('/')
-      //send('ok')
+      redirect('/?didSignUp=true&emailAddress=' + emailAddress)
     })
   })
 

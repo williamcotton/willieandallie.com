@@ -2,7 +2,7 @@ export PATH := node_modules/.bin:$(PATH)
 
 all: build
 
-build: public/build.js public/build.css copy_images
+build: public/build.js public/build.css copy_images .env
 
 .env:
 	cp default.env $@
