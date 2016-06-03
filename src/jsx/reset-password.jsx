@@ -15,7 +15,7 @@ var ResetPassword = React.createClass({
     var Form = this.props.Form
     return <section className='auth-section section text-center'>
       <h1>Reset Password</h1>
-      { this.props.expired ? <Alert bsStyle='warning'>Your password reset token has expired. Please start over.</Alert> : false }
+      {this.props.expired ? <Alert bsStyle='warning'>Your password reset token has expired. Please start over.</Alert> : false}
       <Form action={formAction} method='post'>
         <p>Forgot your password?</p>
         <input type='hidden' name='type' value='email' />

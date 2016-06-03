@@ -25,7 +25,8 @@ var universalApp = ({app}) => {
             'https://scontent.xx.fbcdn.net/t31.0-8/12068676_1283802311636319_3621862624206770528_o.jpg',
             'https://scontent.xx.fbcdn.net/t31.0-8/11700709_1283798084970075_23460392268700948_o.jpg',
             'https://scontent.xx.fbcdn.net/t31.0-8/10549095_1283797418303475_8280370772667950569_o.jpg',
-            'https://scontent.xx.fbcdn.net/t31.0-8/12829268_1283802014969682_2290074573821440146_o.jpg'
+            'https://scontent.xx.fbcdn.net/t31.0-8/12829268_1283802014969682_2290074573821440146_o.jpg',
+            'https://scontent.xx.fbcdn.net/t31.0-8/13346268_1345111445505405_2976367559297847705_o.jpg'
           ]}
         />
         <Gigs
@@ -38,7 +39,7 @@ var universalApp = ({app}) => {
             <input placeholder='jane.doe@example.com' name='emailAddress' type='email' className='form-control form-control-warning' />
             <button type='submit' className='btn btn-ghost-primary'>Sign Up</button>
           </Form>
-          { didSignUp ? <p className='alert alert-success'>{emailAddress} has been added to our email list.</p> : false}
+          {didSignUp ? <p className='alert alert-success'>{emailAddress} has been added to our email list.</p> : false}
         </section>
         <Music />
         <Video />

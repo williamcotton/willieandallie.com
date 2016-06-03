@@ -28,8 +28,8 @@ module.exports = (req, res) => {
       res.onError = this.props.onError
       res.onAbort = this.props.onAbort
       return <form action={action} method={method} encType={encType} className={this.props.className}>
-        { req.csrf ? <input type='hidden' name='_csrf' value={req.csrf} /> : false }
-        { this.props.children }
+        {req.csrf ? <input type='hidden' name='_csrf' value={req.csrf} /> : false}
+        {this.props.children}
       </form>
     }
   })

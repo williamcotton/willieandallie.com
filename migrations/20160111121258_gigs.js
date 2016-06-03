@@ -15,6 +15,15 @@ exports.up = (knex) => {
       table.string('emailAddress').notNull
       table.dateTime('createdAt').notNull()
     })
+    .then(() => {
+      return knex.insert({
+        title: 'Willie & Allie EP Release and Going Away Party', 
+        day: '11', 
+        month: 'JUN',
+        location: 'Overland Bar and Grill, Oakland CA',
+        time: '9:00pm Saturday'
+      }).into('gigs')
+    })
 }
 
 exports.down = (knex) => {

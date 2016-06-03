@@ -23,11 +23,12 @@ module.exports = function ({app, request, localStorage, document, window}) {
 
   var expectReactRenderer = require('../lib/expect-browser-react-renderer')
   var expectBrowserUserAuthentication = require('../lib/expect-browser-user-authentication')
+  var expectBrowserGraphQL = require('../lib/expect-browser-graphql')
 
   var RootComponent = require('../../jsx/root-component.jsx')
   var rootDOMId = 'universal-app-container'
 
-  // adds req.user
+  // adds req.user, req.login, req.logout, req.signup
   app.use(expectBrowserUserAuthentication({
     localStorage,
     app,
@@ -35,7 +36,7 @@ module.exports = function ({app, request, localStorage, document, window}) {
     request
   }))
 
-  // adds res.renderApp
+  // adds res.renderApp, res.Form
   app.use(expectReactRenderer({
     RootComponent,
     app,
@@ -45,27 +46,10 @@ module.exports = function ({app, request, localStorage, document, window}) {
   }))
 
   // adds req.q
-  app.use((req, res, next) => {
-    req.q = (query, callback) => {
-      // cached on server-side to save an XHR lookup
-      if (req.qCache && req.qCache[query]) {
-        return new Promise((accept, reject) => {
-          if (req.qCache[query].data) {
-            accept(req.qCache[query])
-          } else {
-            reject('no data')
-          }
-        })
-      }
-      return new Promise((accept, reject) => {
-        request({method: 'POST', url: '/q', body: query, headers: {'Content-Type': 'application/graphql', 'x-csrf-token': req.csrf}}, (err, res) => {
-          if (err) { return reject(err) }
-          accept(JSON.parse(res.body))
-        })
-      })
-    }
-    next()
-  })
+  app.use(expectBrowserGraphQL({
+    app,
+    request
+  }))
 
   /*
 

@@ -1,13 +1,10 @@
 var validator = require('validator')
 
-var validateCredentials = function (credentials) {
+var validateCredentials = function ({uuid, type, password, repeatPassword}) {
   var errors = []
   var valid = false
-  if (credentials.type === 'email') {
-    var email = credentials.uuid
-    var password = credentials.password
-    var repeatPassword = credentials.repeatPassword
-    if (!validator.isEmail(email)) {
+  if (type === 'email') {
+    if (!validator.isEmail(uuid)) {
       errors.push('EMAIL_INVALID')
     }
     if (password.length < 8) {
@@ -29,13 +26,8 @@ var validateCredentials = function (credentials) {
   }
 }
 
-module.exports = function (options) {
-  var userAuthenticationService = options.userAuthenticationService
-  var verificationSuccessPath = options.verificationSuccessPath
-  var newPasswordPath = options.newPasswordPath
-  var expiredResetPasswordTokenPath = options.expiredResetPasswordTokenPath || '/reset-password'
-  var expectReactRenderer = options.expectReactRenderer
-  var app = options.app
+module.exports = function ({userAuthenticationService, verificationSuccessPath, newPasswordPath, expiredResetPasswordTokenPath, expectReactRenderer, app}) {
+  expiredResetPasswordTokenPath = expiredResetPasswordTokenPath || '/reset-password'
 
     // cookie-session
   var cookieSession = require('cookie-session')

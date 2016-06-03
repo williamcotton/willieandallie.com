@@ -24,8 +24,8 @@ module.exports = class Contact extends React.Component {
         <div className='channels-block'>
           <ul className='channels-list list-inline'>
             {this.props.itunesUrl ? <li><a href={this.props.itunesUrl}><img className='icon' src='/images/itunes.svg' alt='' /></a></li> : false}
-            {this.props.lastFmUrl ? <li><a href={this.props.lastFmUrl}><img className='icon' src='/images/lastfm.svg' alt='' /></a></li> : false }
-            {this.props.vevoUrl ? <li><a href={this.props.vevoUrl}><img className='icon' src='/images/vevo.svg' alt='' /></a></li> : false }
+            {this.props.lastFmUrl ? <li><a href={this.props.lastFmUrl}><img className='icon' src='/images/lastfm.svg' alt='' /></a></li> : false}
+            {this.props.vevoUrl ? <li><a href={this.props.vevoUrl}><img className='icon' src='/images/vevo.svg' alt='' /></a></li> : false}
             {this.props.bandcampUrl ? <li><a href={this.props.bandcampUrl}><img className='icon' src='/images/bandcamp.svg' alt='' /></a></li> : false}
           </ul>
         </div>

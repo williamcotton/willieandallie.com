@@ -3,8 +3,8 @@ var React = require('react')
 var createGig = (gig) => {
   return <div key={gig.day + gig.month} className='item'>
     <div className='date-label'>
-        <div className='number'>{gig.day}</div>
-        <div className='month'>{gig.month}</div>
+      <div className='number'>{gig.day}</div>
+      <div className='month'>{gig.month}</div>
     </div>
     <div className='gig-info'>
       <div className='info-content'>

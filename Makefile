@@ -2,10 +2,16 @@ export PATH := node_modules/.bin:$(PATH)
 
 all: build
 
-build: public/build.js public/build.css copy_images copy_fonts .env
+build: public/build.js public/build.css copy_images copy_fonts .env expect-user-authentication-service-public.pem
 
 .env:
 	cp default.env $@
+
+expect-user-authentication-service.pem:
+	openssl genrsa -out $@ 1024
+
+expect-user-authentication-service-public.pem: expect-user-authentication-service.pem
+	openssl rsa -in $< -pubout -out $@
 
 copy_images:
 	mkdir -p public/images

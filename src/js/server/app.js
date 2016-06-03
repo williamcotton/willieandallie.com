@@ -11,6 +11,15 @@ module.exports = function ({app, defaultTitle, dataSchema, userAuthenticationSer
     app = express()
   }
 
+  // compression
+  var compression = require('compression')
+  app.use(compression())
+
+  // static assets
+  var path = require('path')
+  var publicDir = path.join(__dirname, '/../../../public')
+  app.use(express.static(publicDir))
+
   /*
 
     browser-express app middleware
@@ -18,9 +27,9 @@ module.exports = function ({app, defaultTitle, dataSchema, userAuthenticationSer
 
   */
 
-  var bodyParser = require('body-parser')
   var expectReactRenderer = require('../lib/expect-server-react-renderer')
   var expectServerUserAuthentication = require('../lib/expect-server-user-authentication')
+  var expectServerGraphQL = require('../lib/expect-server-graphql')
 
   var verificationSuccessPath = '/'
   var newPasswordPath = '/new-password'
@@ -41,44 +50,14 @@ module.exports = function ({app, defaultTitle, dataSchema, userAuthenticationSer
     RootComponent,
     app,
     defaultTitle,
-    rootDOMId,
-    template: `<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title><%- title %></title>
-  <link href="/build.css" rel="stylesheet" type="text/css">
-  <script src="//use.edgefonts.net/smokum.js"></script>
-  <script type="text/javascript">
-    window.incomingMessage = <%- JSON.stringify(incomingMessage) %>
-  </script>
-</head>
-<body>
-  <div id="<%- rootDOMId %>"><%- HTML %></div>
-  <% if (typeof(dontLoadJS) === 'boolean' && !dontLoadJS) { %><script src='/build.js' type='text/javascript' charset='utf-8'></script><% } %>
-</body>
-</html>`
+    rootDOMId
   }))
 
   // adds req.q
-  app.post('/q', bodyParser.text({ type: 'application/graphql' }), ({body, user}, res) => {
-    grapqlService(body, {user}).then((result) => res.status(200).json(result))
-  })
-  app.use((req, res, next) => {
-    req.q = (query, callback) => {
-      var user = req && req.user ? req.user : {}
-      return new Promise((accept, reject) => {
-        grapqlService(query, {user}).then(result => {
-          res.outgoingMessage = res.outgoingMessage ? res.outgoingMessage : {}
-          res.outgoingMessage.qCache = res.outgoingMessage.qCache ? res.outgoingMessage.qCache : {}
-          res.outgoingMessage.qCache[query] = result
-          accept(result)
-        }, reject)
-      })
-    }
-    next()
-  })
+  app.use(expectServerGraphQL({
+    app,
+    grapqlService
+  }))
 
   /*
 
@@ -89,14 +68,6 @@ module.exports = function ({app, defaultTitle, dataSchema, userAuthenticationSer
   */
 
   var universalServerApp = require('../../jsx/universal-app.jsx')({app})
-
-  // static assets
-  var publicDir = __dirname + '/../../../public'
-  app.use(express.static(publicDir))
-
-  // compression
-  var compression = require('compression')
-  app.use(compression())
 
   return universalServerApp
 }

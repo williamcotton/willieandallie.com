@@ -20,12 +20,12 @@ var NewPassword = React.createClass({
     var Form = this.props.Form
     return <div className='new-password-container'>
       <h1>New Password</h1>
-      { credentials.uuid ? <Alert bsStyle='warning'>Please choose a new password for <strong>{credentials.uuid}</strong>.</Alert> : false }
+      {credentials.uuid ? <Alert bsStyle='warning'>Please choose a new password for <strong>{credentials.uuid}</strong>.</Alert> : false}
       <Form action={formAction} method='post'>
         <input type='hidden' name='token' value={credentials.token} />
         <input type='hidden' name='uuid' value={credentials.uuid} />
-        <Input bsStyle={ passwordTooShort ? 'error' : null} name='password' type='password' label='Password' defaultValue={ passwordTooShort ? '' : credentials.password} autoFocus />
-        <Input bsStyle={ passwordMismatch ? 'error' : null} name='repeatPassword' type='password' label='Repeat Password' />
+        <Input bsStyle={passwordTooShort ? 'error' : null} name='password' type='password' label='Password' defaultValue={passwordTooShort ? '' : credentials.password} autoFocus />
+        <Input bsStyle={passwordMismatch ? 'error' : null} name='repeatPassword' type='password' label='Repeat Password' />
         <ButtonInput type='submit' value='Update Password' />
       </Form>
     </div>
