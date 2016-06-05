@@ -29,6 +29,8 @@ var createGig = (gig) => {
   </div>
 }
 
+// read only version: https://github.com/kriasoft/react-starter-kit/blob/master/src/components/Header/Header.js
+// function Gigs() { }
 module.exports = class Gigs extends React.Component {
   render () {
     var gigs = this.props.gigs
