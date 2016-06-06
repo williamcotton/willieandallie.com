@@ -1,29 +1,18 @@
 var React = require('react')
-//let {Modal} = require('react-bootstrap')
 
-var Promo = require('./promo.jsx')
-var Gigs = require('./gigs.jsx')
-var Music = require('./music.jsx')
-var Video = require('./video.jsx')
-var Contact = require('./contact.jsx')
-
-var Signup = require('./signup.jsx')
-var Welcome = require('./welcome.jsx')
-var Login = require('./login.jsx')
-var ResetPassword = require('./reset-password.jsx')
-var NewPassword = require('./new-password.jsx')
-var ResetPasswordEmailSent = require('./reset-password-email-sent.jsx')
+const {Promo, Gigs, Music, Video, Contact} = require('./decibel')
+const {Signup, Welcome, Login, ResetPassword, NewPassword, ResetPasswordEmailSent} = require('./auth')
 
 var universalApp = ({app}) => {
   app.get('/', ({q, query: {didSignUp, emailAddress}}, {renderApp, Form}) => {
     q('{ upcomingGigs { title, day, month, location, time, extraInfo, ticketUrl } }').then(({data: {upcomingGigs}}) => {
+      var album = {title: 'Between a Rock and a Country Place - EP', coverArtUrl: '/images/temp-album.jpg'}
       renderApp(<div>
         <Promo
           headline='Willie & Allie'
           tagline='Between a Rock and a Country Place'
           images={[
             'https://scontent.xx.fbcdn.net/t31.0-8/12068676_1283802311636319_3621862624206770528_o.jpg',
-            'https://scontent.xx.fbcdn.net/t31.0-8/11700709_1283798084970075_23460392268700948_o.jpg',
             'https://scontent.xx.fbcdn.net/t31.0-8/10549095_1283797418303475_8280370772667950569_o.jpg',
             'https://scontent.xx.fbcdn.net/t31.0-8/12829268_1283802014969682_2290074573821440146_o.jpg',
             'https://scontent.xx.fbcdn.net/t31.0-8/13346268_1345111445505405_2976367559297847705_o.jpg'
@@ -41,10 +30,15 @@ var universalApp = ({app}) => {
           </Form>
           {didSignUp ? <p className='alert alert-success'>{emailAddress} has been added to our email list.</p> : false}
         </section>
-        <Music />
-        <Video />
+        <Music
+          album={album}
+        />
+        <Video
+          videoSrc='https://www.youtube.com/embed/QzsN7wvu0Lo?rel=0&amp;controls=0&amp;showinfo=0'
+          youtubeUrl='https://www.youtube.com/user/PuffaloPhil'
+        />
         <Contact
-          contactMessage='Sed feugiat varius felis pulvinar tincidunt. Donec bibendum fermentum justo, sit amet commodo augue porta in.'
+          contactMessage=''
           bookingEmail='willieandallie@gmail.com'
           itunesUrl='#'
           bandcampUrl='#'
@@ -70,7 +64,7 @@ var universalApp = ({app}) => {
     newPassword: { component: NewPassword }
   })
 
-  var userRequired = ({user}, {renderApp}, next) => {
+  const userRequired = ({user}, {renderApp}, next) => {
     if (!user) {
       return renderApp(<h2>Login Required!</h2>, {title: 'Login Required'})
     }

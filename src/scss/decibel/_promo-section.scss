@@ -43,6 +43,14 @@
     transform: scale(2);
     -webkit-filter: hue-rotate(90deg);
   }
+  @media (max-width: 767px) {
+    transition: all 3000ms, background-position 8000ms linear;
+    background-position: 0% 100%;
+    &.enter {
+      background-position: 100% 100%;
+      transform: scale(1);
+    }
+  }
 }
 
 .logo-holder {

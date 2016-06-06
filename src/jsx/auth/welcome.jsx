@@ -2,9 +2,9 @@ var React = require('react')
 
 var Welcome = React.createClass({
   render: function () {
-    return <div className='welcome-container'>
+    return <section className='welcome-section section text-center'>
       <h1>Welcome</h1>
-    </div>
+    </section>
   }
 })
 
