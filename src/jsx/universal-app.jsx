@@ -6,7 +6,7 @@ const {Signup, Welcome, Login, ResetPassword, NewPassword, ResetPasswordEmailSen
 var universalApp = ({app}) => {
   app.get('/', ({q, query: {didSignUp, emailAddress}}, {renderApp, Form}) => {
     q('{ upcomingGigs { title, day, month, location, time, extraInfo, ticketUrl } }').then(({data: {upcomingGigs}}) => {
-      var album = {title: 'Between a Rock and a Country Place - EP', coverArtUrl: '/images/temp-album.jpg'}
+      var album = {title: 'Between a Rock and a Country Place - EP', coverArtUrl: '/images/between-a-rock-and-a-hard-place.jpg'}
       renderApp(<div>
         <Promo
           headline='Willie & Allie'
@@ -32,16 +32,16 @@ var universalApp = ({app}) => {
         </section>
         <Music
           album={album}
+          bandcampUrl='https://willieandallie.bandcamp.com'
         />
         <Video
-          videoSrc='https://www.youtube.com/embed/QzsN7wvu0Lo?rel=0&amp;controls=0&amp;showinfo=0'
+          videoSrc='https://www.youtube.com/embed/MxETsJcBdlM?rel=0&amp;controls=0&amp;showinfo=0'
           youtubeUrl='https://www.youtube.com/user/PuffaloPhil'
         />
         <Contact
           contactMessage=''
           bookingEmail='willieandallie@gmail.com'
-          itunesUrl='#'
-          bandcampUrl='#'
+          bandcampUrl='https://willieandallie.bandcamp.com'
           facebookUrl='https://www.facebook.com/willieandallie'
           youtubeUrl='https://www.youtube.com/user/PuffaloPhil'
         />
