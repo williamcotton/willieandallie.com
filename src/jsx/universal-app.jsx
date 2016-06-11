@@ -58,8 +58,8 @@ var universalApp = ({app}) => {
 
   require('../js/lib/expect-universal-user-authentication')({
     app,
-    login: { component: Login, successRedirect: '/welcome' },
-    signup: { component: Signup, successRedirect: '/welcome' },
+    login: { component: Login, successRedirect: '/' },
+    signup: { component: Signup, successRedirect: '/' },
     logout: { successRedirect: '/' },
     resetPassword: { component: ResetPassword, successComponent: ResetPasswordEmailSent },
     newPassword: { component: NewPassword }
