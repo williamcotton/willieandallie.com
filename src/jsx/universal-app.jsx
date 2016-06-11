@@ -6,7 +6,7 @@ const {Signup, Welcome, Login, ResetPassword, NewPassword, ResetPasswordEmailSen
 var universalApp = ({app}) => {
   app.get('/', ({q, query: {didSignUp, emailAddress}}, {renderApp, Form}) => {
     q('{ upcomingGigs { title, day, month, location, time, extraInfo, ticketUrl } }').then(({data: {upcomingGigs}}) => {
-      var album = {title: 'Between a Rock and a Country Place - EP', coverArtUrl: '/images/between-a-rock-and-a-hard-place.jpg'}
+      var album = {title: 'Between a Rock and a Country Place - EP', coverArtUrl: '/images/between-a-rock-and-a-hard-place.jpg', 'linkUrl': 'https://willieandallie.bandcamp.com'}
       renderApp(<div>
         <Promo
           headline='Willie & Allie'
