@@ -35,7 +35,8 @@ var universalApp = ({app}) => {
           bandcampUrl='https://willieandallie.bandcamp.com'
         />
         <Video
-          videoSrc='https://www.youtube.com/embed/MxETsJcBdlM?rel=0&amp;controls=0&amp;showinfo=0'
+          videoSrc1='https://www.youtube.com/embed/MxETsJcBdlM?rel=0&amp;controls=0&amp;showinfo=0'
+          videoSrc2='https://www.youtube.com/embed/QzsN7wvu0Lo?rel=0&amp;controls=0&amp;showinfo=0'
           youtubeUrl='https://www.youtube.com/user/PuffaloPhil'
         />
         <Contact
