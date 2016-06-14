@@ -68,7 +68,7 @@
     "node-uuid": "^1.4.7",
     "nodemon": "^1.9.2",
     "on-headers": "^1.0.1",
-    "pg": "^4.5.5",
+    "pg": "^5.1.0",
     "react": "^15.1.0",
     "react-addons-css-transition-group": "^15.1.0",
     "react-bootstrap": "^0.29.4",
