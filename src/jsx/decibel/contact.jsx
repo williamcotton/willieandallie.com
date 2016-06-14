@@ -15,7 +15,7 @@ module.exports = class Contact extends React.Component {
                   <i className='fa fa-calendar-check-o'></i>
                 </div>
                 <h4 className='title'>Booking</h4>
-                <div className='email'><a href='#'>{this.props.bookingEmail}</a></div>
+                <div className='email'><a href={'mailto:' + this.props.bookingEmail + '?subject=Booking'}>{this.props.bookingEmail}</a></div>
               </div>
             </div>
             <div className='item col-md-4 col-sm-12 col-xs-12'></div>
