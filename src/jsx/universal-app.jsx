@@ -45,6 +45,7 @@ var universalApp = ({app}) => {
           bandcampUrl='https://willieandallie.bandcamp.com'
           facebookUrl='https://www.facebook.com/willieandallie'
           youtubeUrl='https://www.youtube.com/user/PuffaloPhil'
+          spotifyUrl='https://open.spotify.com/album/0JsEVu8b6VFRfX9xVENZIs'
         />
       </div>)
     })
