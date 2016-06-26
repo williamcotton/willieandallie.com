@@ -9,7 +9,7 @@ var reactRenderApp = function (options) {
   var app = options.app
   var formatTitle = options.formatTitle || function (defaultTitle, title) { return defaultTitle + (title ? ' - ' + title : '') }
   return function (req, res, next) {
-    var Form = require('../../jsx/lib/form.jsx')(req, res)
+    var Form = require('./form.jsx')(req, res)
     res.Form = Form
     res.redirect = app.navigate
     res.send = function (data) {

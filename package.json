@@ -2,17 +2,17 @@
   "name": "willieandallie.com",
   "version": "1.0.0",
   "description": "Willie & Allie",
-  "main": "src/js/electron/main.js",
+  "main": "src/electron/main.js",
   "engines": {
     "node": "6.x.x",
-    "npm": "3.6.x"
+    "npm": "3.x.x"
   },
   "scripts": {
     "test": "npm run build && tapes test/**/*.js test/**/**/*-spec.js | tap-spec",
     "build": "make",
     "watch": "nodemon -q -x 'npm test'",
-    "build-dev": "watchify src/js/browser/index.js -o public/build.js -t babelify -v -d",
-    "build-css-dev": "nodemon -w ./src/scss --ext css,scss --exec make -- build_debug_css",
+    "build-dev": "watchify src/browser/index.js -o public/build.js -t babelify -v -d",
+    "build-css-dev": "nodemon -w ./src --ext css,scss --exec make -- build_debug_css",
     "start-dev": "NODE_ENV=development foreman start -f Procfile_dev",
     "db:migrate:currentVersion": "knex -- migrate:currentVersion",
     "db:migrate:latest": "knex -- migrate:latest",

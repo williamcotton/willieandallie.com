@@ -21,11 +21,11 @@ module.exports = function ({app, request, localStorage, document, window}) {
 
   */
 
-  var expectReactRenderer = require('../lib/expect-browser-react-renderer')
-  var expectBrowserUserAuthentication = require('../lib/expect-browser-user-authentication')
-  var expectBrowserGraphQL = require('../lib/expect-browser-graphql')
+  var expectReactRenderer = require('../vendor/expect-browser-react-renderer')
+  var expectBrowserUserAuthentication = require('../vendor/expect-browser-user-authentication')
+  var expectBrowserGraphQL = require('../vendor/expect-browser-graphql')
 
-  var RootComponent = require('../../jsx/root-component.jsx')
+  var RootComponent = require('../components/root-component.jsx')
   var rootDOMId = 'universal-app-container'
 
   // adds req.user, req.login, req.logout, req.signup
@@ -59,7 +59,7 @@ module.exports = function ({app, request, localStorage, document, window}) {
 
   */
 
-  var universalBrowserApp = require('../../jsx/universal-app.jsx')({app})
+  var universalBrowserApp = require('../universal-app.jsx')({app})
 
   return universalBrowserApp
 }

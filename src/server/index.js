@@ -55,7 +55,7 @@ var emailService = {
   ---------------------------
 */
 
-var userAuthenticationDataStore = require('../lib/expect-postgres-user-authentication-data-store')({
+var userAuthenticationDataStore = require('../vendor/expect-postgres-user-authentication-data-store')({
   connection: databaseUrl
 })
 
@@ -64,16 +64,15 @@ var userAuthenticationDataStore = require('../lib/expect-postgres-user-authentic
   user authentication service
   ---------------------------
 
-
   RSA_PRIVATE_KEY_PEM = awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' expect-user-authentication-service.pem
   RSA_PUBLIC_KEY_PEM = awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' expect-user-authentication-service-public.pem
 
 */
 
-var rsaPublicKeyPem = process.env.RSA_PUBLIC_KEY_PEM ? process.env.RSA_PUBLIC_KEY_PEM.replace(/\\n/g,'\n') : fs.readFileSync(__dirname + '/../../../expect-user-authentication-service-public.pem')
-var rsaPrivateKeyPem = process.env.RSA_PRIVATE_KEY_PEM ? process.env.RSA_PRIVATE_KEY_PEM.replace(/\\n/g,'\n') : fs.readFileSync(__dirname + '/../../../expect-user-authentication-service.pem')
+var rsaPublicKeyPem = process.env.RSA_PUBLIC_KEY_PEM ? process.env.RSA_PUBLIC_KEY_PEM.replace(/\\n/g,'\n') : fs.readFileSync(__dirname + '/../../expect-user-authentication-service-public.pem')
+var rsaPrivateKeyPem = process.env.RSA_PRIVATE_KEY_PEM ? process.env.RSA_PRIVATE_KEY_PEM.replace(/\\n/g,'\n') : fs.readFileSync(__dirname + '/../../expect-user-authentication-service.pem')
 
-var userAuthenticationService = require('../lib/expect-user-authentication-service')({
+var userAuthenticationService = require('../vendor/expect-user-authentication-service')({
   emailService,
   verificationPath: '/verify/:token',
   resetPasswordPath: '/reset-password/:token',

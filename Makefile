@@ -24,10 +24,10 @@ copy_fonts:
 build_css: clean_css public/build.css
 
 build_debug_css: clean_css
-	"node-sass" src/scss/index.scss public/build.css --source-map public/build.css.map
+	"node-sass" src/index.scss public/build.css --source-map public/build.css.map
 
 build_debug_js: clean_js
-	browserify src/js/browser/index.js -d -t babelify > public/build.js
+	browserify src/browser/index.js -d -t babelify > public/build.js
 
 clean: clean_css clean_js
 
@@ -41,11 +41,11 @@ clean_js:
 
 public/build.css:
 	mkdir -p public
-	"node-sass" src/scss/index.scss $@ --output-style compressed
+	"node-sass" src/index.scss $@ --output-style compressed
 
 public/build.browserify.js:
 	mkdir -p public
-	browserify src/js/browser/index.js -t babelify > $@
+	browserify src/browser/index.js -t babelify > $@
 
 public/build.js: public/build.browserify.js
 	mkdir -p public

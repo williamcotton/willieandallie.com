@@ -17,7 +17,7 @@ module.exports = function ({app, defaultTitle, dataSchema, userAuthenticationSer
 
   // static assets
   var path = require('path')
-  var publicDir = path.join(__dirname, '/../../../public')
+  var publicDir = path.join(__dirname, '/../../public')
   app.use(express.static(publicDir))
 
   /*
@@ -27,13 +27,13 @@ module.exports = function ({app, defaultTitle, dataSchema, userAuthenticationSer
 
   */
 
-  var expectReactRenderer = require('../lib/expect-server-react-renderer')
-  var expectServerUserAuthentication = require('../lib/expect-server-user-authentication')
-  var expectServerGraphQL = require('../lib/expect-server-graphql')
+  var expectReactRenderer = require('../vendor/expect-server-react-renderer')
+  var expectServerUserAuthentication = require('../vendor/expect-server-user-authentication')
+  var expectServerGraphQL = require('../vendor/expect-server-graphql')
 
   var verificationSuccessPath = '/'
   var newPasswordPath = '/new-password'
-  var RootComponent = require('../../jsx/root-component.jsx')
+  var RootComponent = require('../components/root-component.jsx')
   var rootDOMId = 'universal-app-container'
 
   // adds req.user
@@ -67,7 +67,7 @@ module.exports = function ({app, defaultTitle, dataSchema, userAuthenticationSer
 
   */
 
-  var universalServerApp = require('../../jsx/universal-app.jsx')({app})
+  var universalServerApp = require('../universal-app.jsx')({app})
 
   return universalServerApp
 }

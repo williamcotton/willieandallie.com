@@ -69,7 +69,7 @@ module.exports = function ({userAuthenticationService, verificationSuccessPath, 
   })
 
   // expect-server-csrf
-  expectReactRenderer.use(require('../lib/expect-server-csrf')({
+  expectReactRenderer.use(require('./expect-server-csrf')({
     app: app
   }))
 

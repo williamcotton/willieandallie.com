@@ -1,7 +1,7 @@
 var React = require('react')
 
-const {Promo, Gigs, Music, Video, Contact} = require('./decibel')
-const {Signup, Welcome, Login, ResetPassword, NewPassword, ResetPasswordEmailSent} = require('./auth')
+const {Promo, Gigs, Music, Video, Contact} = require('./components/decibel')
+const {Signup, Welcome, Login, ResetPassword, NewPassword, ResetPasswordEmailSent} = require('./components/auth')
 
 var universalApp = ({app}) => {
   app.get('/', ({q, query: {didSignUp, emailAddress}}, {renderApp, Form}) => {
@@ -57,7 +57,7 @@ var universalApp = ({app}) => {
     })
   })
 
-  require('../js/lib/expect-universal-user-authentication')({
+  require('./vendor/expect-universal-user-authentication')({
     app,
     login: { component: Login, successRedirect: '/' },
     signup: { component: Signup, successRedirect: '/' },
