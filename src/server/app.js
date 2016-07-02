@@ -30,14 +30,14 @@ module.exports = function ({app, defaultTitle, userAuthenticationService, grapql
   var expectReactRenderer = require('../vendor/expect-server-react-renderer')
   var expectServerUserAuthentication = require('../vendor/expect-server-user-authentication')
   var expectServerGraphQL = require('../vendor/expect-server-graphql')
-  var logger = require('./logger')
 
   var verificationSuccessPath = '/'
   var newPasswordPath = '/new-password'
   var RootComponent = require('../components/root-component.jsx')
   var rootDOMId = 'universal-app-container'
 
-  app.use(logger)
+  // var logger = require('./logger')
+  // app.use(logger)
 
   // adds req.user
   app.use(expectServerUserAuthentication({app, userAuthenticationService, expectReactRenderer, verificationSuccessPath, newPasswordPath}))
