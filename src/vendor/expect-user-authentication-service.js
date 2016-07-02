@@ -32,8 +32,8 @@ module.exports = ({userAuthenticationDataStore, emailService, userTokenExpiresIn
           }
         })
       })
-      // if type: facebook
-      // TODO: check validity of token, check data store for user.uuid for facebook id
+    // if type: facebook
+    // TODO: check validity of token, check data store for user.uuid for facebook id
     },
     verifyToken: ({token, audience}, callback) => {
       jwt.verify(token, rsaPublicKeyPem, {issuer: issuer, audience: audience, algorithm: 'RS256'}, (err, user) => {
@@ -41,7 +41,11 @@ module.exports = ({userAuthenticationDataStore, emailService, userTokenExpiresIn
       })
     },
     refreshToken: ({token, audience}, callback) => {
-      jwt.verify(token, rsaPublicKeyPem, {issuer: issuer, audience: audience, algorithm: 'RS256'}, (err, {uuid, type, verified}) => {
+      if (!token || !audience || !rsaPublicKeyPem) {
+        return callback(true, false)
+      }
+      jwt.verify(token, rsaPublicKeyPem, {issuer: issuer, audience: audience, algorithm: 'RS256'}, (err, user) => {
+        let {uuid, type, verified} = user || {}
         if (err) {
           return callback(err, false)
         }
@@ -156,7 +160,8 @@ module.exports = ({userAuthenticationDataStore, emailService, userTokenExpiresIn
                 userAuthenticationService.sendVerificationEmail({
                   baseUrl: baseUrl,
                   emailAddress: newCredentials.uuid
-                }, () => {})
+                }, () => {
+                })
               }
               if (err) {
                 callback('CREATE_ERROR')
@@ -167,8 +172,8 @@ module.exports = ({userAuthenticationDataStore, emailService, userTokenExpiresIn
           })
         })
       })
-      // if type: facebook
-      // TODO: check validity of token, check to see if facebook id is there, if not, make a new user and associate it with the facebook id
+    // if type: facebook
+    // TODO: check validity of token, check to see if facebook id is there, if not, make a new user and associate it with the facebook id
     },
     // TODO: addNewCredentials - given a valid token and new credentials (phone number, facebook, twitter), create new user_credentials and associate with the token user
     destroyUser: (credentials, callback) => {
@@ -183,8 +188,8 @@ module.exports = ({userAuthenticationDataStore, emailService, userTokenExpiresIn
         })
       })
     }
-    // sign a POST action as a JWT token, authorizing the user - so perhaps middleware that checks req.session.userToken and req.method for POST and signs and notarizes the transaction
-    // notarize a POST action with a valid JWT token, issuing another token with a timestamp
+  // sign a POST action as a JWT token, authorizing the user - so perhaps middleware that checks req.session.userToken and req.method for POST and signs and notarizes the transaction
+  // notarize a POST action with a valid JWT token, issuing another token with a timestamp
   }
 
   return userAuthenticationService

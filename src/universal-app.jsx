@@ -51,9 +51,9 @@ var universalApp = ({app}) => {
     })
   })
 
-  app.post('/newEmailListSignup', ({q, body: {emailAddress}}, res) => {
+  app.post('/newEmailListSignup', ({q, body: {emailAddress}}, {navigate}) => {
     q(`mutation { newEmailListSignup(emailAddress: "${emailAddress}") { emailAddress } }`).then((result) => {
-      res.redirect('/?didSignUp=true&emailAddress=' + emailAddress)
+      navigate('/', {didSignUp: true, emailAddress})
     })
   })
 

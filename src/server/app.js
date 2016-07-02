@@ -1,4 +1,4 @@
-module.exports = function ({app, defaultTitle, dataSchema, userAuthenticationService, grapqlService}) {
+module.exports = function ({app, defaultTitle, userAuthenticationService, grapqlService}) {
   /*
 
     express app
@@ -30,34 +30,23 @@ module.exports = function ({app, defaultTitle, dataSchema, userAuthenticationSer
   var expectReactRenderer = require('../vendor/expect-server-react-renderer')
   var expectServerUserAuthentication = require('../vendor/expect-server-user-authentication')
   var expectServerGraphQL = require('../vendor/expect-server-graphql')
+  var logger = require('./logger')
 
   var verificationSuccessPath = '/'
   var newPasswordPath = '/new-password'
   var RootComponent = require('../components/root-component.jsx')
   var rootDOMId = 'universal-app-container'
 
+  app.use(logger)
+
   // adds req.user
-  app.use(expectServerUserAuthentication({
-    app,
-    userAuthenticationService,
-    expectReactRenderer,
-    verificationSuccessPath,
-    newPasswordPath
-  }))
+  app.use(expectServerUserAuthentication({app, userAuthenticationService, expectReactRenderer, verificationSuccessPath, newPasswordPath}))
 
   // adds res.renderApp
-  app.use(expectReactRenderer({
-    RootComponent,
-    app,
-    defaultTitle,
-    rootDOMId
-  }))
+  app.use(expectReactRenderer({app, RootComponent, defaultTitle, rootDOMId}))
 
   // adds req.q
-  app.use(expectServerGraphQL({
-    app,
-    grapqlService
-  }))
+  app.use(expectServerGraphQL({app, grapqlService}))
 
   /*
 

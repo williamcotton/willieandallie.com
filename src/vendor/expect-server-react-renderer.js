@@ -1,8 +1,9 @@
-var async = require('async')
+const async = require('async')
+const queryString = require('query-string')
 
 var middlewareStack = []
 
-var defaultTemplate = `<!doctype html>
+const defaultTemplate = `<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -31,15 +32,16 @@ var reactRenderApp = function (options) {
     res.Form = Form
     res.outgoingMessage = res.outgoingMessage ? res.outgoingMessage : {}
     res.outgoingMessage.defaultTitle = options.defaultTitle
-    var navigate = function (pathname) {
+    res.navigate = function (path, query) {
+      var pathname = path + '?' + queryString.stringify(query)
       res.redirect(pathname)
     }
     res.renderApp = function (content, opts) {
       var rootProps = {}
       var contentProps = {}
       var title = formatTitle(options.defaultTitle, opts ? opts.title : false)
-      rootProps.navigate = navigate
-      contentProps.navigate = navigate
+      rootProps.navigate = res.navigate
+      contentProps.navigate = res.navigate
       async.each(middlewareStack, function (middlewareFunction, callback) {
         middlewareFunction(req, res, contentProps, rootProps, callback)
       }, function () {
@@ -52,9 +54,11 @@ var reactRenderApp = function (options) {
         }
         rootProps.content = contentWithProps
         rootProps.opts = opts
+        var startTime = new Date()
         var HTML = ReactDOMServer.renderToStaticMarkup(RootComponent(rootProps))
         // if template was optional, or dynamic... a module could pass in the template...
         var renderedTemplate = ejs.render(template, { HTML: HTML, title: title, rootDOMId: options.rootDOMId, incomingMessage: res.outgoingMessage, dontLoadJS: false }, {})
+        res.renderAppLog = {time: new Date() - startTime}
         res.send(renderedTemplate)
       })
     }

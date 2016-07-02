@@ -1,6 +1,7 @@
-var async = require('async')
-var React = require('react')
-var ReactDOM = require('react-dom')
+const async = require('async')
+const React = require('react')
+const ReactDOM = require('react-dom')
+const queryString = require('query-string')
 
 var middlewareStack = []
 
@@ -11,6 +12,10 @@ var reactRenderApp = function (options) {
   return function (req, res, next) {
     var Form = require('./form.jsx')(req, res)
     res.Form = Form
+    res.navigate = function (path, query) {
+      var pathname = path + '?' + queryString.stringify(query)
+      app.navigate(pathname)
+    }
     res.redirect = app.navigate
     res.send = function (data) {
       if (typeof data === 'object') {
@@ -21,8 +26,8 @@ var reactRenderApp = function (options) {
     res.renderApp = function (content, opts) {
       var rootProps = {}
       var contentProps = {}
-      rootProps.navigate = app.navigate
-      contentProps.navigate = app.navigate
+      rootProps.navigate = res.navigate
+      contentProps.navigate = res.navigate
       rootProps.submit = app.submit
       contentProps.submit = app.submit
       options.document.title = formatTitle(req.defaultTitle, opts ? opts.title : false)

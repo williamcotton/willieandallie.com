@@ -29,27 +29,13 @@ module.exports = function ({app, request, localStorage, document, window}) {
   var rootDOMId = 'universal-app-container'
 
   // adds req.user, req.login, req.logout, req.signup
-  app.use(expectBrowserUserAuthentication({
-    localStorage,
-    app,
-    expectReactRenderer,
-    request
-  }))
+  app.use(expectBrowserUserAuthentication({localStorage, app, expectReactRenderer, request}))
 
   // adds res.renderApp, res.Form
-  app.use(expectReactRenderer({
-    RootComponent,
-    app,
-    rootDOMId,
-    document,
-    localStorage
-  }))
+  app.use(expectReactRenderer({RootComponent, app, rootDOMId, document, localStorage}))
 
   // adds req.q
-  app.use(expectBrowserGraphQL({
-    app,
-    request
-  }))
+  app.use(expectBrowserGraphQL({app, request}))
 
   /*
 

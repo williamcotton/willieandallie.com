@@ -17,8 +17,8 @@ exports.up = (knex) => {
     })
     .then(() => {
       return knex.insert({
-        title: 'Willie & Allie EP Release and Going Away Party', 
-        day: '11', 
+        title: 'Willie & Allie EP Release and Going Away Party',
+        day: '11',
         month: 'JUN',
         location: 'Overland Bar and Grill, Oakland CA',
         time: '9:00pm Saturday'

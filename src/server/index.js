@@ -1,7 +1,5 @@
 require('node-jsx').install({extension: '.jsx'})
 
-var fs = require('fs')
-
 var nodeEnv = process.env.NODE_ENV
 var defaultTitle = process.env.DEFAULT_TITLE
 var port = process.env.PORT || 5000
@@ -13,7 +11,21 @@ var databaseUrl = process.env.DATABASE_URL
   sendgrid
 */
 
-var sendgrid = require('sendgrid')(process.env.SENDGRID_USERNAME, process.env.SENDGRID_PASSWORD)
+var sendgrid = require('sendgrid').SendGrid(process.env.SENDGRID_API_KEY)
+
+function sendMail ({to, from, subject, text}, callback) {
+  var helper = require('sendgrid').mail
+  var fromEmail = new helper.Email(from)
+  var toEmail = new helper.Email(to)
+  var content = new helper.Content('text/plain', text)
+  var mail = new helper.Mail(fromEmail, subject, toEmail, content)
+  var requestBody = mail.toJSON()
+  var request = sendgrid.emptyRequest()
+  request.method = 'POST'
+  request.path = '/v3/mail/send'
+  request.body = requestBody
+  sendgrid.API(request, callback)
+}
 
 var emailService = {
   sendVerificationUrl: function (options, callback) {
@@ -28,7 +40,7 @@ var emailService = {
     if (nodeEnv === 'development') {
       console.log(payload)
     } else {
-      sendgrid.send(payload, callback)
+      sendMail(payload, callback)
     }
     callback(false, payload)
   },
@@ -44,7 +56,7 @@ var emailService = {
     if (nodeEnv === 'development') {
       console.log(payload)
     } else {
-      sendgrid.send(payload, callback)
+      sendMail(payload, callback)
     }
     callback(false, payload)
   }
@@ -64,13 +76,10 @@ var userAuthenticationDataStore = require('../vendor/expect-postgres-user-authen
   user authentication service
   ---------------------------
 
-  RSA_PRIVATE_KEY_PEM = awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' expect-user-authentication-service.pem
-  RSA_PUBLIC_KEY_PEM = awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' expect-user-authentication-service-public.pem
-
 */
 
-var rsaPublicKeyPem = process.env.RSA_PUBLIC_KEY_PEM ? process.env.RSA_PUBLIC_KEY_PEM.replace(/\\n/g,'\n') : fs.readFileSync(__dirname + '/../../expect-user-authentication-service-public.pem')
-var rsaPrivateKeyPem = process.env.RSA_PRIVATE_KEY_PEM ? process.env.RSA_PRIVATE_KEY_PEM.replace(/\\n/g,'\n') : fs.readFileSync(__dirname + '/../../expect-user-authentication-service.pem')
+var rsaPublicKeyPem = process.env.RSA_PUBLIC_KEY_PEM.replace(/\\n/g, '\n')
+var rsaPrivateKeyPem = process.env.RSA_PRIVATE_KEY_PEM.replace(/\\n/g, '\n')
 
 var userAuthenticationService = require('../vendor/expect-user-authentication-service')({
   emailService,
@@ -89,7 +98,7 @@ var userAuthenticationService = require('../vendor/expect-user-authentication-se
 
 var graphql = require('graphql')
 
-var dataSchema = require('./data-schema')({databaseUrl})
+var dataSchema = require('../schema')
 
 var grapqlService = (query, context) => {
   return graphql.graphql(dataSchema, query, context)
@@ -100,8 +109,7 @@ var universalServerApp = require('./app')({
   defaultTitle,
   nodeEnv,
   userAuthenticationService,
-  grapqlService
-})
+grapqlService})
 
 universalServerApp.listen(port, function () {
   console.log('universalServerApp is running in %s mode on port %s', nodeEnv, port)
