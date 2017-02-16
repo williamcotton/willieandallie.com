@@ -104,12 +104,7 @@ var grapqlService = (query, context) => {
   return graphql.graphql(dataSchema, query, context)
 }
 
-var universalServerApp = require('./app')({
-  port,
-  defaultTitle,
-  nodeEnv,
-  userAuthenticationService,
-grapqlService})
+var universalServerApp = require('./app')({port, defaultTitle, nodeEnv, userAuthenticationService, grapqlService})
 
 universalServerApp.listen(port, function () {
   console.log('universalServerApp is running in %s mode on port %s', nodeEnv, port)

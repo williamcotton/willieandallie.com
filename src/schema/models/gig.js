@@ -1,4 +1,4 @@
-const {GraphQLString, GraphQLNonNull, GraphQLObjectType} = require('graphql')
+const {GraphQLString, GraphQLNonNull, GraphQLObjectType, GraphQLBoolean} = require('graphql')
 
 const bookshelf = require('../bookshelf')
 
@@ -16,7 +16,8 @@ const gigType = new GraphQLObjectType({
     location: { type: new GraphQLNonNull(GraphQLString) },
     time: { type: new GraphQLNonNull(GraphQLString) },
     extraInfo: { type: GraphQLString },
-    ticketUrl: { type: GraphQLString }
+    ticketUrl: { type: GraphQLString },
+    published: { type: GraphQLBoolean }
   })
 })
 

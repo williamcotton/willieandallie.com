@@ -9,6 +9,7 @@ exports.up = (knex) => {
       table.string('time')
       table.string('extraInfo')
       table.string('ticketUrl')
+      table.boolean('published')
     })
     .createTable('emailListSignups', (table) => {
       table.increments('id').primary()

@@ -9,6 +9,7 @@ module.exports = {
   resolve: ({user}, data) => {
     return Gig
       .query('orderBy', 'id', 'asc')
+      .where('published', true)
       .fetchAll()
       .then(gigs => gigs.toJSON())
   }
