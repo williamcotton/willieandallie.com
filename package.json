@@ -4,7 +4,7 @@
   "description": "Willie & Allie",
   "main": "src/electron/main.js",
   "engines": {
-    "node": "6.x.x",
+    "node": "6.7.0",
     "npm": "3.x.x"
   },
   "scripts": {
