@@ -39,7 +39,7 @@ public/build.css:
 
 public/build.browserify.js:
 	mkdir -p public
-	browserify src/browser/index.js -t babelify > $@
+	browserify src/browser/index.js -t [ babelify --presets [ es2015 react ] ] -o $@
 
 public/build.js: public/build.browserify.js
 	mkdir -p public
