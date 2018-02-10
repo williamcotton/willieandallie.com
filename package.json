@@ -13,7 +13,7 @@
     "watch": "nodemon -q -x 'npm test'",
     "build-dev": "watchify src/browser/index.js -o public/build.js -t [ babelify --presets [ es2015 react ] ] -v -d",
     "build-css-dev": "nodemon -w ./src --ext css,scss --exec make -- build_debug_css",
-    "start-dev": "NODE_ENV=development foreman start -f Procfile_dev",
+    "start-dev": "NODE_ENV=development heroku local -f Procfile_dev",
     "db:migrate:currentVersion": "knex -- migrate:currentVersion",
     "db:migrate:latest": "knex -- migrate:latest",
     "db:migrate:make": "knex -- migrate:make",
