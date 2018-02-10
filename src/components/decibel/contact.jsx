@@ -3,6 +3,7 @@ var React = require('react')
 module.exports = class Contact extends React.Component {
   render () {
     return <div id='contact' className='contact-section section text-center'>
+    <a name='contact' />
       <div className='container'>
         <h2 className='section-title'>Contact</h2>
         <div className='section-intro center-block'>{this.props.contactMessage}</div>

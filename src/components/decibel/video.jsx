@@ -3,6 +3,7 @@ var React = require('react')
 module.exports = class Video extends React.Component {
   render () {
     return <section id='video' className='video-section section text-center'>
+      <a name='video' />
       <div className='container'>
         <h2 className='section-title'>Video</h2>
         <iframe src={this.props.videoSrc1} frameBorder='0' allowFullScreen></iframe>

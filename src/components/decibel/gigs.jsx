@@ -35,6 +35,7 @@ module.exports = class Gigs extends React.Component {
   render () {
     var gigs = this.props.gigs
     return <section id='gigs' className='gigs-section section' name='gigs'>
+      <a name='gigs' />
       <div className='container'>
         <h2 className='section-title text-center'>Upcoming Gigs</h2>
         <div className='gigs-container'>

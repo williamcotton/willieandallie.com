@@ -43,6 +43,7 @@ module.exports =
       })
       var imgUrl = images[this.state.imageIndex]
       return <section id='promo' className='promo-section section'>
+               <a name='promo' />
                <div className='screen'></div>
                <div className='slides' ref='slides'>
                  {slides}
