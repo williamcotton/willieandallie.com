@@ -17,7 +17,7 @@ var universalApp = ({app}) => {
             'https://dl.dropboxusercontent.com/s/07l7fd7zr4iexcm/00044_still.jpg'
           ]}
         />
-        { upcomingGigs.size > 0 ? <Gigs gigs={upcomingGigs} /> : false }
+        { upcomingGigs.length > 0 ? <Gigs gigs={upcomingGigs} /> : false }
         <Music
           album={album}
           bandcampUrl='https://willieandallie.bandcamp.com'

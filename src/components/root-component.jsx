@@ -30,7 +30,7 @@ const RootComponent = React.createClass({
         </Header>
         {content}
         <Footer>
-          <div className="copyright">Willie &amp; Allie © 2016</div>
+          <div className="copyright">Willie &amp; Allie © 2018</div>
         </Footer>
       </div>
     );
